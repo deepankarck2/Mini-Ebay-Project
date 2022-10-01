@@ -22,15 +22,3 @@
 - [ ] 7.Grade an OU afterbuying an itemfrom him/her, 1 being the worst and 5 being the best.Any OU making 3 1 (worst) or 5(best) rating to others, the OU must see the SU to make sure there is no problem, a warning or removal could ensure based on SU’s judgment.
 - [ ] 8.See his/her own transaction history.9.Change his/her password, name, address, phone,and credit card number.
 
-## A GU can do the following tasks:
-- [ ] 1.Browse/search available items based on title, keywords, price range, and ratings; 
-- [ ] 2.Report to SU about the suspicious items (stolen) s/he spot from the site, if proventrue the SU will remove the item and the CU who posted it and generate a report to be sent to police;
-- [ ] 3.Apply to be an OU
-
-## Other system constraints:
-
-- [ ] 1.OUs removed from the system by SUs will be blocked for future re-application.
-- [ ] 2.Items removed from the systemby SUs will be blacklisted fromsystem.
-- [ ] 3.Thesystem can distinguish the interest of an OUduring the loginsession and show different GUI according to the users’ browsing or selling/buying history. No adaptive GUI for GUs or SUs.
-- [ ] 4.GUI is required, could be a local application or web-based one, no preference
-- [ ] 5.A creative feature with 10% of the project determined by each team, considerably creative ones (positive outliers) could obtain special bonus.
