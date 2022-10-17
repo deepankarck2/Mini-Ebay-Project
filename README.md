@@ -1,5 +1,5 @@
 # An Electronic Trading System (Mini-Ebay)
-#### We want to develop electronic trading such that every responsible user can trade theiritems. There are three types of users to this system: 
+#### We want to develop electronic trading such that every responsible user can trade their items. There are three types of users to this system: 
 1. Superusers (SUs), 
 2. Ordinary users (OUs),and 
 3. Guests (GUs).
