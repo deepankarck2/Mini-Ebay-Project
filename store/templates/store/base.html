@@ -18,11 +18,11 @@
             <a href="#"><img src="{% static 'store/media/logo.png' %}" class="logo"></a>
             <div>
                 <ul id="navbar">
-                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="{% url 'store-home' %}" class="active">Home</a></li>
                     <li><a href="#">Shop</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
+                    <li><a href= "{% url 'register' %}">Register</a></li>
                     <li><a href=""><i class="gg-shopping-bag"></i></a></li> <!-- ADDING THE ICON-->
                 </ul>
             </div>
