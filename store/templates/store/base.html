@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ecommerce Website</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css"/> <!-- Font awesome-->
+        
+        <link href='https://css.gg/shopping-bag.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'store/store_styles.css' %}">
+    </head>
+    <body>
+        <section id="header">
+            <a href="#"><img src="{% static 'store/media/logo.png' %}" class="logo"></a>
+            <div>
+                <ul id="navbar">
+                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href=""><i class="gg-shopping-bag"></i></a></li> <!-- ADDING THE ICON-->
+                </ul>
+            </div>
+        </section>
+        {% if messages %}
+        <div class='section-p1'>
+            {% if messages %}
+                {% for message in messages %}
+                    <div> {{ message }}<div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endif %}
+        {% block content %}
+        
+        {% endblock content %}
+        <script src="" async defer></script>
+    </body>
+</html>
