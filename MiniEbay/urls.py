@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from users import views as user_views
+from django.contrib.auth import views as auth_views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
     path('register/', user_views.register, name='register'), 
+
+    path('login/', auth_views.LoginView().as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='login')
 ]
