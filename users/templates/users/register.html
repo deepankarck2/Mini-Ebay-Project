@@ -10,7 +10,7 @@
                 <legend> Join Today</legend>
                 {{ form | crispy }}
             </fieldset>
-            
+
             <button type="submit"> Submit </button> 
         </form>
         <div>
@@ -18,7 +18,7 @@
         </div>
         <br> 
         <small>
-            <em>Already have an account? <a href="#">Login </a></em>
+            <em>Already have an account? <a href="{% url 'login' %} ">Login </a></em>
         </small>
     <div>
 {% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "store/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="section-p1"> 
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <legend> Login</legend>
+            {{ form.as_p }}
+        </fieldset>
+        
+        <button type="submit"> Login </button> 
+    </form>
+
+    <br> 
+    <small>
+        <em>Need an account? <a href="{% url 'register' %}">Sigup </a></em>
+    </small>
+<div>
+{% endblock content %}

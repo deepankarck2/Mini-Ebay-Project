@@ -15,14 +15,22 @@
     </head>
     <body>
         <section id="header">
-            <a href="#"><img src="{% static 'store/media/logo.png' %}" class="logo"></a>
+            <a href="{% url 'store-home' %}"><img src="{% static 'store/media/logo.png' %}" class="logo"></a>
             <div>
                 <ul id="navbar">
+                    <li> Hello {{ user.username }} </li>
                     <li><a href="{% url 'store-home' %}" class="active">Home</a></li>
                     <li><a href="#">Shop</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href= "{% url 'register' %}">Register</a></li>
+
+                    <!-- For Conditional LOGIN View -->
+                    {% if user.is_authenticated %}
+                    <li><a href=" {% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
                     <li><a href=""><i class="gg-shopping-bag"></i></a></li> <!-- ADDING THE ICON-->
                 </ul>
             </div>
