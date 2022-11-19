@@ -4,7 +4,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Ecommerce Website</title>
+        <!-- Title & Favicon-->
+        <title>Mini-Ebay</title>
+        <link rel="icon" type="image/x-icon" href="https://www.ccpc.ie/consumers/wp-content/uploads/sites/2/2020/11/shopping-graphic.png">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css"/> <!-- Font awesome-->
@@ -12,6 +14,7 @@
         <link href='https://css.gg/shopping-bag.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{% static 'store/store_styles.css' %}">
+        <link rel="stylesheet" href="{% static 'store/category_styles.css' %}">
     </head>
     <body>
         <section id="header">
@@ -20,7 +23,7 @@
                 <ul id="navbar">
                     <li> Hello {{ user.username }} </li>
                     <li><a href="{% url 'store-home' %}" class="active">Home</a></li>
-                    <li><a href="#">Shop</a></li>
+                    <li><a href="{% url 'store-categories' %}">Shop</a></li>
                     <li><a href="#">Contact</a></li>
 
                     <!-- For Conditional LOGIN View -->

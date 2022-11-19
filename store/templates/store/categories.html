@@ -4,5 +4,17 @@
 <div class="section-p1">
     <h2>All Categories</h2>
     <hr>
+    <div class="cards">
+        {% for item in category %}
+                <div class="card"> 
+                    <div>
+                        <img class="image" src="{{ item.image.url }}" alt="category-image"/>
+                    </div>
+                    <div>
+                        <a href="#" class="cat_link"><h4>{{ item.name }} </a>
+                    </h4></div>
+                </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
