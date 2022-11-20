@@ -1,6 +1,11 @@
 {% extends "store/base.html" %}
-{% load static %}
 {% block content %}
+<div style="margin-top:10px"> 
+    <div style="margin-left:80px;" class="link_nav">
+        <a href={% url 'store-home' %}>Home/</a>
+        <a href={% url 'store-categories'%}>Categories</a>
+    </div>
+</div>
 <div class="section-p1">
     <h2>All Categories</h2>
     <hr>
@@ -11,8 +16,8 @@
                         <img class="image" src="{{ item.image.url }}" alt="category-image"/>
                     </div>
                     <div>
-                        <a href="#" class="cat_link"><h4>{{ item.name }} </a>
-                    </h4></div>
+                        <a href="{% url 'categoriesview' item.slug %}" class="cat_link"><h4>{{ item.name }} 
+                    </h4></a></div>
                 </div>
         {% endfor %}
     </div>

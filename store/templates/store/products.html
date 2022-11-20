@@ -1,0 +1,31 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+<div style="margin-top:10px"> 
+    <div style="margin-left:80px;" class="link_nav">
+        <a href="{% url 'store-home' %}">Home/</a>
+        <a href="{% url 'store-categories'%}">Categories/</a>
+        <a href="{% url 'categoriesview' category.slug %}">{{category.name}}-Products</a>
+    </div>
+</div>
+<div class="section-p1">
+    <h2>{{category.name}}</h2>
+    <hr>
+    <div class="cards">
+        {% for item in products %}
+                <div class="card"> 
+                    <div>
+                        <img class="image" src="{{ item.product_image.url }}" alt="product-image">
+                    </div>
+                    <div>
+                        <a href="#" class="cat_link"><h4>{{ item.name }}</h4></a>
+                    </div>
+                    <div>
+                        <span>Original:$ {{item.original_price}}<span>
+                        <span>Bidding:$ {{item.bidding_price}}<span>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

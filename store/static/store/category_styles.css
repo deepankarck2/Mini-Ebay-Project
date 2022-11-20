@@ -1,3 +1,6 @@
+.link_nav > a{
+  text-decoration: none;
+}
 .cards{
   display: flex;
   flex-direction: row;
@@ -6,7 +9,7 @@
 }
 
 .card{
-  width: 250px;
+  width: 260px;
   text-align: center;
   padding: 25px 15px;
   box-shadow: 30px 20px 34px rgba(0,0,0,0.03);
@@ -19,10 +22,11 @@
 }
 
 .card img{
-    width: 100%;   /*to make it responsive */ 
-    margin-bottom: 10px;
+  max-width: 100%;   /*to make it responsive */ 
+  margin-bottom: 10px;
+  height: 200px; 
+  object-fit: cover;
 }
-
 .cat_link{
   text-decoration: none;
   color: black;

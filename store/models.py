@@ -31,7 +31,7 @@ class Category(models.Model):
         return self.name
 
 class Product(models.Model):
-    Category = models.ForeignKey(Category,  on_delete=models.CASCADE)
+    category = models.ForeignKey(Category,  on_delete=models.CASCADE)
     slug = models.CharField(max_length=150, null=False, blank=False)
     name = models.CharField(max_length=50, null=False, blank=False)
     product_image = models.ImageField( upload_to=get_file_path_pro, null=True, blank=True)
