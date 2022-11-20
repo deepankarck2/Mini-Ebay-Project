@@ -1,0 +1,44 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+<div style="margin-top:10px"> 
+    <div style="margin-left:80px;" class="link_nav">
+        <a href="{% url 'store-home' %}">Home/</a>
+        <a href="{% url 'store-categories'%}">Categories/</a>
+        <a href="{% url 'categoriesview' products.category.slug %}">{{products.category.name}}-Products/</a>
+        <a href="{% url 'productview' products.category.slug products.slug %}">{{products.name}}-Products</a>
+    </div>
+</div>
+
+<div class='section-p1'>
+    <div class="wrap">
+        <div class='prod_img'>
+            <img class="side_img" src="{{ products.product_image.url }}" alt="product-image">
+        </div>
+
+        <div class="prod_details">
+            <h3>{{products.name}}</h3>
+            <p  class="small_description">{{products.small_description}} </p>
+            <hr>
+            <p class="prod_description">{{products.description}}</p>
+
+            <div class="quantity">
+                <label for="Quantity"> Quantity</label>
+                <div class="buttons"> 
+                    <button class='but' onclick="decreaseValue()"> - </button>
+                    <input type="text" name="quantity" value=0 class="quan_input" id="number"> 
+                    <button class='but' onclick="increaseValue()"> + </button>
+                </div>
+            </div>
+            <div class="cart_button">
+                {% if products.quantity > 0 %}
+                    <button class="add_cart">Add to Cart <i class="fa fa-shopping-cart"> </i></button>
+                {% else %0
+                    <p class="not_avail">Item is Not available now!</p>
+                {% endif %}
+                
+            <div>
+        </div>
+    <div>
+<div>
+{% endblock content %}

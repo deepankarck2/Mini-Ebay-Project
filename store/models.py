@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 import os
 # Create your models here.
@@ -34,6 +35,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category,  on_delete=models.CASCADE)
     slug = models.CharField(max_length=150, null=False, blank=False)
     name = models.CharField(max_length=50, null=False, blank=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     product_image = models.ImageField( upload_to=get_file_path_pro, null=True, blank=True)
     small_description = models.TextField(max_length=250, null=False, blank=False)
     quantity = models.IntegerField(null=False, blank=False)

@@ -14,16 +14,18 @@
     <div class="cards">
         {% for item in products %}
                 <div class="card"> 
-                    <div>
-                        <img class="image" src="{{ item.product_image.url }}" alt="product-image">
-                    </div>
-                    <div>
-                        <a href="#" class="cat_link"><h4>{{ item.name }}</h4></a>
-                    </div>
-                    <div>
-                        <span>Original:$ {{item.original_price}}<span>
-                        <span>Bidding:$ {{item.bidding_price}}<span>
-                    </div>
+                    <a href="{% url 'productview' category.slug item.slug %}" class="cat_link">
+                        <div>
+                            <img class="image" src="{{ item.product_image.url }}" alt="product-image">
+                        </div>
+                        <div>
+                            <h4>{{ item.name }}</h4>
+                        </div>
+                        <div>
+                            <span>Original:$ {{item.original_price}}<span>
+                            <span>Bidding:$ {{item.bidding_price}}<span>
+                        </div>
+                    </a>
                 </div>
         {% endfor %}
     </div>

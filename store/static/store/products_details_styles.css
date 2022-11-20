@@ -1,0 +1,71 @@
+.wrap{
+    display: flex;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 15px;
+    height: 90vh;
+}
+
+.pord_img{
+    width: 40%;
+    object-fit: contain;
+}
+
+.side_img{
+    float: left;
+    width:  500px;
+    height: 500px;
+    object-fit: cover;
+
+    /*max-width: 100%;
+    height: 500px; 
+    object-fit: cover;*/ 
+}
+
+.prod_details{
+    margin-left: 4px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.prod_description{
+    margin-top: 35px;
+    text-align: justify;
+}
+
+.small_description{
+    margin-top: 8px;
+}
+/* Increase/Des Button */ 
+.quantity{
+    margin-top: 18px;
+}   
+.buttons{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+}
+.but{
+    width: 30px;
+    height: 30px;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.quan_input{
+    height: 30px;
+    width: 45px;
+    text-align: center;
+}
+
+/* Add to cart */
+.cart_button{
+    margin-top: 20px;
+}
+
+.add_cart{
+    width: 108px;
+    height: 32px;
+}

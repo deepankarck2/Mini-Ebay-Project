@@ -24,3 +24,19 @@ def categoriesview(request, slug):
     else:
         messages.warning(request, "No such Category was fouond")
         return redirect("store-collections")
+
+def product_details(request, cate_slug, prod_slug):
+    if(Category.objects.filter(slug=cate_slug, status=0)):
+        if(Product.objects.filter(slug=prod_slug, status=0)):
+            products = Product.objects.filter(slug=prod_slug, status=0).first()
+            context = {
+                'products' : products,
+            }
+        else:
+            messages(request, "No such Product found!")
+            return redirect('store-collections')
+    else:
+        messages.error(request, "No such category found")
+        return redirect('store-collections')
+    
+    return render(request, 'store/product_details.html', context)
