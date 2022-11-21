@@ -6,6 +6,9 @@
     box-sizing: border-box;
     font-family: 'Josefin Slab', serif;
 }
+.hidden{
+    display: none;
+}
 
 :root {
     --main-bg-color: #ebcfc4d2;

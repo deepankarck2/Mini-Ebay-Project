@@ -1,9 +1,33 @@
+$(document).ready(function(){
+  $('#addToCartBtn').click( e => {
+      e.preventDefault();
+      var prod_id = $(e.currentTarget).closest('.product_data').find('.id_prod').val();
+      var prod_quantity =  $(e.currentTarget).closest('.product_data').find('.quan_input').val();
+      var token = $('input[name=csrfmiddlewaretoken]').val();
+      console.log(token);
+
+      $.ajax({
+        method : "POST",
+        url: "/add-to-cart",
+        data: {
+          'product_id' : prod_id,
+          'prod_quantity' : prod_quantity,
+           csrfmiddlewaretoken : token
+        },
+        success: (response) =>{
+          res = response
+            console.log(res);
+            alert(response['status'])
+        }
+      })
+  })
+});
+
 function increaseValue() {
     var value = parseInt(document.getElementsByClassName('quan_input')[0].value, 10);
     value = isNaN(value) ? 0 : value;
     value++;
     document.getElementsByClassName('quan_input')[0].value = value;
-    console.log(value);
   }
   
 function decreaseValue() {
