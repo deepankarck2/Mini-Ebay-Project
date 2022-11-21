@@ -49,3 +49,9 @@ class Product(models.Model):
     meta_keywords= models.CharField(max_length=150, null=False, blank=False)
     meta_description= models.CharField(max_length=500, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_quantity = models.IntegerField(null=False, blank=False)
+    created_at = models.DateField( auto_now_add=True)
