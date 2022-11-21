@@ -10,8 +10,8 @@
     </div>
 </div>
 
-<div class='section-p1'>
-    <div class="wrap">
+<div class="section-p1">
+    <div class="wrap product_data">
         <div class='prod_img'>
             <img class="side_img" src="{{ products.product_image.url }}" alt="product-image">
         </div>
@@ -23,6 +23,8 @@
             <p class="prod_description">{{products.description}}</p>
 
             <div class="quantity">
+                {% csrf_token %}
+                <input class="id_prod" type='hidden' value="{{ products.id }}">
                 <label for="Quantity"> Quantity</label>
                 <div class="buttons"> 
                     <button class='but' onclick="decreaseValue()"> - </button>
@@ -32,7 +34,7 @@
             </div>
             <div class="cart_button">
                 {% if products.quantity > 0 %}
-                    <button class="add_cart">Add to Cart <i class="fa fa-shopping-cart"> </i></button>
+                    <button class="add_cart" id="addToCartBtn">Add to Cart <i class="fa fa-shopping-cart"> </i></button>
                 {% else %}
                     <p class="not_avail">Item is Not available now!</p>
                 {% endif %}
