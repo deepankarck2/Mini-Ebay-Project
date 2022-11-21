@@ -19,10 +19,12 @@ def addtocart(request):
                         Cart.objects.create(user=request.user, product_id=product_id, product_quantity=product_quantity)
                         return JsonResponse({'status': "Product added successfully"})
                     else:
-                        return JsonResponse({'status': "Only" + str(product_check.quantityproduct_check.quantity) + " is available"})
+                        mes = "Only " + str(product_check.quantity) + " products are available"
+                        return JsonResponse({'status': mes})
             else:
                 return JsonResponse({'status': "No such product found"})
         else:
             return JsonResponse({'status': "Login to Continue"})
     else:
         return redirect('store-home') 
+

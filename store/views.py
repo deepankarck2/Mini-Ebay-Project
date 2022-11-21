@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Category, Product
+from .models import Category, Product, Cart
 from django.contrib import messages
 
 def home(request):
@@ -40,3 +40,10 @@ def product_details(request, cate_slug, prod_slug):
         return redirect('store-collections')
     
     return render(request, 'store/product_details.html', context)
+
+def viewcart(request):
+    cart = Cart.objects.filter(user=request.user)
+    context = {
+       'cart': cart
+    }
+    return render(request, 'store/cart.html', context)

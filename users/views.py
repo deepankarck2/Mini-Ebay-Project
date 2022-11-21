@@ -3,8 +3,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
-        
-# Create your views here.
+
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import LoginView
+
+#View related to login and show message
+class viewLogin(SuccessMessageMixin, LoginView):
+    template_name = 'users/login.html'
+    success_url = 'store-home'
+    success_message = "Successfully logged in"
+
+# View related to register
 def register(request):
     if(request.method == "POST"):
         form = UserRegisterForm(request.POST)

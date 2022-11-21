@@ -16,6 +16,12 @@
         <link rel="stylesheet" href="{% static 'store/store_styles.css' %}">
         <link rel="stylesheet" href="{% static 'store/category_styles.css' %}">
         <link rel="stylesheet" href="{% static 'store/products_details_styles.css' %}">
+        {% comment "Alertify JS" %}{% endcomment %}        
+        <!-- CSS -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
     </head>
     <body>
         <section id="header">
@@ -35,7 +41,7 @@
                     <li><a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
                     <li><a href="{% url 'register' %}">Register </a></li>
                     {% endif %}
-                    <li><a href=""><i class="gg-shopping-bag"></i></a></li> <!-- ADDING THE ICON-->
+                    <li><a href='{% url 'cart' %}'><i class="gg-shopping-bag"></i></a></li> <!-- ADDING THE ICON-->
                 </ul>
             </div>
         </section>
@@ -51,7 +57,18 @@
         {% block content %}
         
         {% endblock content %}
+        <!-- Jquery-->
         <script src="{% static 'store/js/jquery-3.6.1.min.js' %}"></script>
+        <!-- Custom JS -->
         <script src="{% static 'store/js/app.js' %}" async defer></script>
+        <!-- Alertify JS -->
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+        <script>
+            alertify.set('notifier','position', 'top-right');
+            {% for msg in messages %}
+                alertify.success('{{ msg }}');
+            {% endfor %}
+        </script> 
+
     </body>
 </html>
