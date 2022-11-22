@@ -57,6 +57,7 @@
         {% block content %}
         
         {% endblock content %}
+        
         <!-- Jquery-->
         <script src="{% static 'store/js/jquery-3.6.1.min.js' %}"></script>
         <!-- Custom JS -->
@@ -64,7 +65,7 @@
         <!-- Alertify JS -->
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         <script>
-            alertify.set('notifier','position', 'top-right');
+            alertify.set('notifier','position', 'top-left');
             {% for msg in messages %}
                 alertify.success('{{ msg }}');
             {% endfor %}

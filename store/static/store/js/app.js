@@ -1,9 +1,10 @@
 $(document).ready(function(){
   $('#addToCartBtn').click( e => {
       e.preventDefault();
-      document.getElementsByClassName('quan_input')[0].value = 0; 
       var prod_id = $(e.currentTarget).closest('.product_data').find('.id_prod').val();
       var prod_quantity =  $(e.currentTarget).closest('.product_data').find('.quan_input').val();
+      console.log(prod_quantity);
+
       var token = $('input[name=csrfmiddlewaretoken]').val();
       
       $.ajax({

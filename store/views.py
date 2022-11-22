@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Category, Product, Cart
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'store/home.html')
@@ -41,6 +42,7 @@ def product_details(request, cate_slug, prod_slug):
     
     return render(request, 'store/product_details.html', context)
 
+@login_required
 def viewcart(request):
     cart = Cart.objects.filter(user=request.user)
     context = {
