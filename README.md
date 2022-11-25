@@ -1,5 +1,9 @@
 # Documentation and Reports
 * [Phase-II Report](https://github.com/deepankarck2/Mini-Ebay-Project/files/10088725/X_chakraborty_phase_II.pdf)
+## Demo Home Page:
+
+<img src="https://user-images.githubusercontent.com/52084764/203933545-c9dfdf72-c5ba-44d6-8ec3-76c1e9452b17.png" height=780px width=710px>
+
 
 # An Electronic Trading System (Mini-Ebay)
 #### We want to develop electronic trading such that every responsible user can trade their items. There are three types of users to this system: 
