@@ -1,3 +1,6 @@
+# Documentation and Reports
+* [Phase-II Report](https://github.com/deepankarck2/Mini-Ebay-Project/files/10088725/X_chakraborty_phase_II.pdf)
+
 # An Electronic Trading System (Mini-Ebay)
 #### We want to develop electronic trading such that every responsible user can trade their items. There are three types of users to this system: 
 1. Superusers (SUs), 
