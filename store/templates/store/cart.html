@@ -4,14 +4,17 @@
 <div class="section-p1">
 
     <div class="cart">
+        {% if not cart %}
+            <h1> No item in cart!</h1>
+        {% else %}
         <div class="cart_container">
           <div class="grid_12">
             <h1>Your Cart</h1>
           </div>
-          <ul class="items crt_itm">
+          <ul class="items crt_itm cartdata">
             {% for item in cart %}
-            <li class="grid_4 item">
-              <a href="#" class="btn-remove">
+            <li class="grid_4 item product_data">
+              <a href="#" class="btn-remove delete-cart-item">
                 <i class="far fa-trash-alt"></i>
               </a>
               <div class="preview">
@@ -27,14 +30,18 @@
               <div class="inner_container">
       
                 <div class="col_1of2 align-center picker">
+                    {% csrf_token %}
+                    <input class="id_prod" type='hidden' value="{{ item.product.id }}">
                   <p>
-                    <a href="#" class="btn-quantity plus">
+                    <a href="#" class="btn-quantity but increaseValue changeQuantity">
                       <i class="fas fa-plus"></i>
                     </a>
-                  <div class="col_1of2 quantity-text">
-                    <p><span class="current_quantity">{{ item.product_quantity }}</span> @ ${{ item.product.original_price }}</p>
+                  <div class="col_1of2 quantity-text ">
+                        <input type="text" value= "{{ item.product_quantity }}" class="quan_input" id="number" style="outline:none;">
+                        <span>@ ${{ item.product.original_price }}</span>
+                    </p>
                   </div>
-                  <a href="#" class="btn-quantity minus">
+                  <a href="#" class="btn-quantity minus but decreaseValue changeQuantity">
                     <i class="fas fa-minus"></i>
                   </a>
                   </p>
@@ -43,7 +50,7 @@
               </div>
             </li>
             {% endfor %}
-          </ul>
+        </ul>
 
           <div class="grid_12 summary">
             <div class="inner_container">
@@ -73,6 +80,7 @@
             </div>
           </div>
 
+          {% endif %}
           <div class="grid_12 delivery-payment">
             <div class="grid_6 delivery-address">
               <h3>Delivery Address</h3>
@@ -87,7 +95,7 @@
           
           <div class="grid_12 coupon">
             <h3>Apply Coupon</h3>
-            <input class="coupon-input" type="text">
+            <input class="coupon-input crt_input" type="text">
           </div>
         </div>
       </div>

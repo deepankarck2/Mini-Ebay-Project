@@ -30,19 +30,19 @@
             <div>
                 <ul id="navbar">
                     <li> Hello {{ user.username }} </li>
-                    <li><a href="{% url 'store-home' %}" class="active">Home</a></li>
-                    <li><a href="{% url 'store-categories' %}">Shop</a></li>
+                    <li><a href="{% url 'store-home' %}"  class="{% if request.resolver_match.url_name == 'store-home' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'store-categories' %}" class="{% if request.resolver_match.url_name == 'store-categories' %}active{% endif %}">Shop</a></li>
                     <li><a href="#">Contact</a></li>
 
                     <!-- For Conditional LOGIN View -->
                     {% if user.is_authenticated %}
-                    <li><a href=" {% url 'profile' %}">Profile</a></li>
+                    <li><a href=" {% url 'profile' %}" class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a></li>
                     {% else %}
-                    <li><a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
-                    <li><a href="{% url 'register' %}">Register </a></li>
+                    <li><a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                    <li><a href="{% url 'register' %}" class="{% if request.resolver_match.url_name == 'register' %}active{% endif %}">Register </a></li>
                     {% endif %}
-                    <li><a href='{% url 'cart' %}'><i class="gg-shopping-bag"></i></a></li> <!-- ADDING THE ICON-->
+                    <li><a href="{% url 'cart' %}"><i class="gg-shopping-bag {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"></i></a></li> <!-- ADDING THE ICON-->
                 </ul>
             </div>
         </section>
