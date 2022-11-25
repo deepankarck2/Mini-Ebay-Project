@@ -2,6 +2,100 @@
 {% load static %}
 {% block content %}
 <div class="section-p1">
+
+    <div class="cart">
+        <div class="cart_container">
+          <div class="grid_12">
+            <h1>Your Cart</h1>
+          </div>
+          <ul class="items crt_itm">
+            {% for item in cart %}
+            <li class="grid_4 item">
+              <a href="#" class="btn-remove">
+                <i class="far fa-trash-alt"></i>
+              </a>
+              <div class="preview">
+                <img class="cart_img" src='{{ item.product.product_image.url }}' alt="prodtct-image"> 
+              </div>
+              <div class="details" data-price="15.50">
+                <h3>
+                    {{ item.product.name }}
+                </h3>
+                <p>{{ item.product.small_description}}</p>
+      
+              </div>
+              <div class="inner_container">
+      
+                <div class="col_1of2 align-center picker">
+                  <p>
+                    <a href="#" class="btn-quantity plus">
+                      <i class="fas fa-plus"></i>
+                    </a>
+                  <div class="col_1of2 quantity-text">
+                    <p><span class="current_quantity">{{ item.product_quantity }}</span> @ ${{ item.product.original_price }}</p>
+                  </div>
+                  <a href="#" class="btn-quantity minus">
+                    <i class="fas fa-minus"></i>
+                  </a>
+                  </p>
+                  <input type="hidden" class="quantity_field" name="quantity" data-price="15.50" value="1" />
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+
+          <div class="grid_12 summary">
+            <div class="inner_container">
+              <div class="summary-content">
+              <div class="col_1of2 meta-data">
+                <div class="sub-total">
+                  <em>Sub Total: </em><span class="amount"></span>
+                </div>
+                <div class="taxes">
+                  <em>Plus Tax: </em><span class="amount">@ 5%</span>
+                </div>
+      
+              </div>
+              <div class="col_1of2">
+                <div class="total">
+                  <span class="amount">$100</span>
+                </div>
+              </div>
+              </div>
+              <div class="btn-summary">
+      
+                <a href="#" class="btn-checkout btn-reverse">Continue Shopping</a>
+      
+                <a href="#" class="btn-checkout">Checkout</a>
+      
+              </div>
+            </div>
+          </div>
+
+          <div class="grid_12 delivery-payment">
+            <div class="grid_6 delivery-address">
+              <h3>Delivery Address</h3>
+              <p>46 Vale Road</br>
+                Ramsgate</p>
+            </div>
+            <div class="grid_6 payment-details">
+              <h3>Payment Card</h3>
+              <p> **** **** **** 8678</p>
+            </div>
+          </div>
+          
+          <div class="grid_12 coupon">
+            <h3>Apply Coupon</h3>
+            <input class="coupon-input" type="text">
+          </div>
+        </div>
+      </div>
+</div> 
+
+{% endblock content %}
+
+{% comment "" %}
     {% for item in cart %}
         <img src='{{ item.product.product_image.url }}' alt="prodtct-image" style="width:90px; height:90px;"> 
         {{ item.product.name }}
@@ -11,5 +105,4 @@
         <br> 
         <br> 
     {% endfor %}
-</div> 
-{% endblock content %}
+{% endcomment %}

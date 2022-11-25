@@ -68,3 +68,11 @@
     width: 108px;
     height: 32px;
 }
+
+.prices{
+    margin-top: 18px;
+}
+
+.prices > .bid_price{
+    color: brown;
+}

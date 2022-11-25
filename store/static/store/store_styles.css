@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Josefin Slab', serif;
+    font-family: 'Josefin Slab', 'Roboto', sans-serif;
 }
 .hidden{
     display: none;
