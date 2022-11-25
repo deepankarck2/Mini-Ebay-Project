@@ -251,7 +251,7 @@
   margin-bottom: 20px;
 }
 
-h3 {
+.cart > h3 {
   font-family: "Amatic SC", cursive;
   font-size: 2em;
 }
@@ -271,7 +271,7 @@ h3 {
   font-size: 2em;
 }
 
-input {
+.crt_input {
   border-radius: 10px;
   height: 40px;
 }
@@ -299,7 +299,8 @@ input {
   padding: 0 20px;
 }
 
-h1 {
+
+.grid_12 > h1 {
   font-family: "Amatic SC", cursive;
   font-size: 4em;
 }

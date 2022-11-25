@@ -32,3 +32,24 @@ def addtocart(request):
     else:
         return redirect('store-home') 
 
+def updatecart(request):
+    if request.method == 'POST':
+        prod_id = int(request.POST.get('product_id'))
+        if(Cart.objects.filter(user= request.user, product_id= prod_id)):
+            prod_qty = int(request.POST.get('prod_quantity'))
+            cart = Cart.objects.get(user= request.user, product_id = prod_id)
+            cart.product_quantity = prod_qty
+            cart.save()
+        return JsonResponse({'status': 'sucessfully updated!'})
+    else:
+        return redirect('store-home')
+
+def deleteCartItem(request):
+    if request.method == 'POST':
+        prod_id = int(request.POST.get('product_id'))
+        if(Cart.objects.filter(user= request.user, product_id= prod_id)):
+            cart = Cart.objects.get(user= request.user, product_id = prod_id)
+            cart.delete()
+        return JsonResponse({'status': 'sucessfully deleted!'})
+    else:
+        return redirect('store-home')
