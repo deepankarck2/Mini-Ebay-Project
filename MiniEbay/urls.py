@@ -34,6 +34,8 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
 
     path('add-to-cart', cart.addtocart, name="addtocart"),
+    path('update-cart', cart.updatecart, name="updatecart"),
+    path('delete-cart-item', cart.deleteCartItem, name="deleteCartItem")
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
