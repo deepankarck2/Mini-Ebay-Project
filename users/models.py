@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime 
 import os 
+from PIL import Image 
 
 def get_file_path(request, filename):
     original_filename = filename
@@ -9,19 +10,29 @@ def get_file_path(request, filename):
     filename = "%s%s" % (current_time, original_filename)
     return os.path.join('profile_pics/', filename)
 
-class Profile(models.Model):
+class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(null=False, max_length=150)
-    last_name = models.CharField(null=False, max_length=150)
-    image = models.ImageField(default='defailt.jpg', upload_to= get_file_path)
-    phone = models.CharField(null=False, max_length=50)
-    address = models.CharField(null=False, max_length=150)
-    city = models.CharField(null=False, max_length=80)
-    state = models.CharField(null=False, max_length= 80)
-    country = models.CharField(null=False, max_length=80)
-    zip_code = models.CharField(null=False, max_length=50)
+    first_name = models.CharField(null=True,blank=True, max_length=150)
+    last_name = models.CharField(null=True,blank=True, max_length=150)
+    image = models.ImageField(default='profile_pics/default.jpg', upload_to= get_file_path)
+    phone = models.CharField(null=True,blank=True, max_length=50)
+    address = models.CharField(null=True,blank=True, max_length=150)
+    city = models.CharField(null=True,blank=True, max_length=80)
+    state = models.CharField(null=True,blank=True, max_length= 80)
+    country = models.CharField(null=True,blank=True, max_length=80)
+    zip_code = models.CharField(null=True,blank=True, max_length=50)
     created_at = models.DateField(auto_now_add=True)
+    warnings = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return f'{self.user.username} Profile'
     
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 30:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

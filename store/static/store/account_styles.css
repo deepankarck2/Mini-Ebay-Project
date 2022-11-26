@@ -1,0 +1,14 @@
+
+.form-group {
+    display: flex;
+    width: 65%;
+    flex-direction: column;
+    align-content: stretch;
+}
+
+.ac_cell{
+   font-size: 18px;
+}
+.form-group-2{
+    margin-top: 5px;
+}

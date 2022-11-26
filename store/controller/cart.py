@@ -53,3 +53,4 @@ def deleteCartItem(request):
         return JsonResponse({'status': 'sucessfully deleted!'})
     else:
         return redirect('store-home')
+

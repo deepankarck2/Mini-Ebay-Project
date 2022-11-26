@@ -72,15 +72,15 @@
               </div>
               <div class="btn-summary">
       
-                <a href="#" class="btn-checkout btn-reverse">Continue Shopping</a>
+                <a href="{% url 'store-categories' %}" class="btn-checkout btn-reverse">Continue Shopping</a>
       
-                <a href="#" class="btn-checkout">Checkout</a>
+                <a href="{% url 'checkout' %}"  class="btn-checkout">Checkout</a>
       
               </div>
             </div>
           </div>
-
           {% endif %}
+
           <div class="grid_12 delivery-payment">
             <div class="grid_6 delivery-address">
               <h3>Delivery Address</h3>
