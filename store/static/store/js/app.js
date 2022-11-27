@@ -67,8 +67,10 @@ $(document).ready(function(){
         }
       })
   })
+
   $('.delete-cart-item').click(function(e){
-    e.preventDefault();
+        e.preventDefault();
+        console.log("fjhgdfh");
         var prod_id = $(e.currentTarget).closest('.product_data').find('.id_prod').val();
         var token = $('input[name=csrfmiddlewaretoken]').val();
         
@@ -82,10 +84,14 @@ $(document).ready(function(){
           success: (response) =>{
             res = response
             console.log(res);
-            $('.cartdata').load(location.href + " .cartdata")
+            setInterval(()=>{
+              location.reload(true);
+            }, 200);
           }
-    })
 
+    })
+    
   })
+  
 });
 

@@ -1,0 +1,82 @@
+.wrap_ckout{
+    display: flex;
+    width: 100%;
+    
+}
+
+.left-ckout{
+    width: 49%;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    margin-right: 3px;
+    padding: 7px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.right-ckout{
+    margin-left: 80px;
+    width: 45%;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    padding: 7px;
+}
+
+.ck-cell{
+    font-size: 16px;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+    
+.ck_total_price{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.ck_place_order{
+    width: 100%;
+    height: 40px;
+    font-size: large;
+    border: none;
+    border-radius: 10px;
+    background-color: lightpink
+}
+
+.ck_place_order:active{
+    box-shadow: 0 5px 0 #ffdde5;
+    transform: translateY(3px);
+}
