@@ -35,7 +35,7 @@
 ## A GU can do the following tasks:
 - [ ] 1.Browse/search available items based on title, keywords, price range, and ratings; 
 - [ ] 2.Report to SU about the suspicious items (stolen) s/he spot from the site, if proven true the SU will remove the item and the CU who posted it and generate a report to be sent to police;
-- [ ] 3.Apply to be an OU
+- [X] 3.Apply to be an OU
 
 ## Other system constraints:
 
