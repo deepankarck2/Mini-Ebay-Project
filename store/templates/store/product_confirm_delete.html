@@ -12,10 +12,10 @@
         {% else %}
             <h2>Delete a Product! </h2>
             <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <h3>Are you sure you want  to delete the post? " {{ object.title }}"</h3>
                 <button style="color: red;" type="submit"> Yes </button>
                 <button> <a href="{% url 'productview' object.category.slug object.slug %}"> Go back</a> </button>
-
             </form>
             <div>
                 {{form.errors}}

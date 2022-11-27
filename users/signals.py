@@ -9,5 +9,5 @@ def create_account(sender, instance, created, **kwargs):
         Account.objects.create(user=instance)
 
 @receiver(post_save, sender = User)
-def save_account(sender, instance, **kwargs):
+def save_account(sender, instance,*args, **kwargs):
     instance.account.save()

@@ -46,6 +46,7 @@
                 {% if user == products.author%}
                 <button class="add_cart" id=""> <a href= "{% url 'product-delete' products.id %}"> Delete <i class=""> </a></button>
                 {% endif %}
+                <p> {{ products.id }} </p> 
             <div>
         </div>
     <div>
