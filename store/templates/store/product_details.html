@@ -6,7 +6,7 @@
         <a href="{% url 'store-home' %}">Home/</a>
         <a href="{% url 'store-categories'%}">Categories/</a>
         <a href="{% url 'categoriesview' products.category.slug %}">{{products.category.name}}-Products/</a>
-        <a href="{% url 'productview' products.category.slug products.slug %}">{{products.name}}-Products</a>
+        <a href="{% url 'productview' products.category.slug products.slug %}">{{products.name}}</a>
     </div>
 </div>
 
@@ -41,6 +41,10 @@
                     <button class="bid_btn add_cart" id="bidbtn">Place Bid <i class="fa fa-gavel"> </i></button>
                 {% else %}
                     <p class="not_avail">Item is Not available now!</p>
+                {% endif %}
+                
+                {% if user == products.author%}
+                <button class="add_cart" id=""> <a href= "{% url 'product-delete' products.id %}"> Delete <i class=""> </a></button>
                 {% endif %}
             <div>
         </div>

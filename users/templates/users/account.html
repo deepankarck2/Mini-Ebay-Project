@@ -11,15 +11,16 @@
                 {{ user.account.phone }} 
             {% endif %}
         </h3>
+        <h3>Warnings: {{ user.account.warnings }}</h3>
         <br> 
 
         <div class="form-group">
             <div class="form-group-1">
                 <label for="street"> Street: </label>
-                <input type="street" 
+                <input type="text" 
                     class="form-control ac_cell" 
                     id="street" 
-                    placeholder="Street" value = {{ user.account.address }}>
+                    placeholder="Street" value = "{{ user.account.address }}">
                 
                 <label for="inputCity">City: </label>
                 <input type="city" 
