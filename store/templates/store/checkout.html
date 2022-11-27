@@ -5,16 +5,87 @@
         <h2>Checkout Page </h2> 
         <div class="wrap_ckout">
             <div class="left-ckout"> 
-                <label for="ck_first_name">First Name</label>
-                <input id="ck_first_name" type="text" disable></input>
+                <div>
+                    <h3>Address Summary</h3> 
+                </div> 
+                <div> 
+                    <label for="ck_first_name">First Name: </label>
+                    <input id="ck_first_name" class="ck-cell" type="text" value="Nothing" disabled> </input>
 
-                <label for="ck_last_name">Last Name</label>
-                <input id="ck_last_name" type="text" disable></input>
-            <div>
+                    <label for="ck_last_name">Last Name: </label>
+                    <input id="ck_last_name" type="text" class="ck-cell" disable></input>
+                </div> 
 
-            <div class="left-ckout"> 
-                    <p> {% lorem 100 w random %}</p>
-            <div>
+                <div> 
+                    <label for="ck_email">Email</label>
+                    <input id="ck_email" type="text" class="ck-cell" disable></input>
+
+                    <label for="ck_phone">Phone</label>
+                    <input id="ck_last_name" type="text" class="ck-cell" disable></input>
+                </div> 
+
+                <div>
+                    <label for="ck_address">Address</label>
+                    <input id="ck_address" type="text" class="ck-cell" disable></input>
+                </div>
+
+                <div>
+                    <label for="ck_city">City</label>
+                    <input id="ck_city" type="text" class="ck-cell" disable></input>
+
+                    <label for="ck_state">State</label>
+                    <input id="ck_state" type="text" class="ck-cell" disable></input>
+                </div>
+
+                <div>
+                    <label for="ck_zip">Zip Code</label>
+                    <input id="ck_zip" type="text" class="ck-cell" disable></input>
+                </div>
+
+
+
+            </div>
+
+            <div class="right-ckout"> 
+                <div><h3>Order Summary</h3></div>
+
+                <div>
+                    {% if cartitems %}
+                    <table class="styled-table"> 
+                        <thead>
+                            <tr>
+                                <th>Image </th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            {% for item in cartitems %}
+                                <tr>
+                                    <th>
+                                        <img src = "{{ item.product.product_image.url }}" height="50px" width = "50px"> 
+                                    </th> 
+                                    <th>{{ item.product.name }}</th>
+                                    <th>{{ item.product_quantity }}</th>
+                                    <th>{{ item.product.original_price }}</th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table> 
+
+                    <div class="ck_total_price"> 
+                        <h4>Total Price: </h4>  
+                        <h4 style="float: left; color: red;"> ${{ total_price }} </h4>
+                    </div>
+                    <div class="ck_place_order_wrap"> 
+                        <button class="ck_place_order"><strong>Place Order<strong></button>
+                    </div> 
+                    {% else %}
+                        <h4>Your Cart is empty:</h4>
+                    {% endif %}
+                <div> 
+            </div>
         <div> 
     </div>
 {% endblock content%}

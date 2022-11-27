@@ -9,17 +9,20 @@
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     margin-right: 3px;
     padding: 7px;
+    min-height: 220px;
     max-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    border-radius: 20px;
 }
 
 .right-ckout{
     margin-left: 80px;
     width: 45%;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    padding: 7px;
+    padding: 13px;
+    border-radius: 20px;
 }
 
 .ck-cell{
@@ -73,7 +76,8 @@
     font-size: large;
     border: none;
     border-radius: 10px;
-    background-color: lightpink
+    background-color: lightpink;
+    margin-top: 5px;
 }
 
 .ck_place_order:active{

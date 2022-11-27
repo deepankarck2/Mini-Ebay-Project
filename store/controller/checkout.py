@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from store.models import Cart 
 
+@login_required
 def checkoutitem(request):
     rawcart = Cart.objects.filter(user = request.user)
     for item in rawcart:

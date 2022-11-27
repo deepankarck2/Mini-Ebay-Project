@@ -14,8 +14,8 @@
           <ul class="items crt_itm cartdata">
             {% for item in cart %}
             <li class="grid_4 item product_data">
-              <a href="#" class="btn-remove delete-cart-item">
-                <i class="far fa-trash-alt"></i>
+              <a class="btn-remove">
+                <i class="far fa-trash-alt delete-cart-item"></i>
               </a>
               <div class="preview">
                 <img class="cart_img" src='{{ item.product.product_image.url }}' alt="prodtct-image"> 
@@ -33,7 +33,7 @@
                     {% csrf_token %}
                     <input class="id_prod" type='hidden' value="{{ item.product.id }}">
                   <p>
-                    <a href="#" class="btn-quantity but increaseValue changeQuantity">
+                    <a class="btn-quantity but increaseValue changeQuantity">
                       <i class="fas fa-plus"></i>
                     </a>
                   <div class="col_1of2 quantity-text ">
@@ -41,7 +41,7 @@
                         <span>@ ${{ item.product.original_price }}</span>
                     </p>
                   </div>
-                  <a href="#" class="btn-quantity minus but decreaseValue changeQuantity">
+                  <a class="btn-quantity minus but decreaseValue changeQuantity">
                     <i class="fas fa-minus"></i>
                   </a>
                   </p>
