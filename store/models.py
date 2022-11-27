@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 import os
+from django.urls import reverse
+
 # Create your models here.
 
 def get_file_path_cat(request, filename):
@@ -35,8 +37,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category,  on_delete=models.CASCADE)
     slug = models.CharField(max_length=150, null=False, blank=False)
     name = models.CharField(max_length=50, null=False, blank=False)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    product_image = models.ImageField( upload_to=get_file_path_pro, null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
+    product_image = models.ImageField(upload_to=get_file_path_pro, null=True, blank=True)
     small_description = models.TextField(max_length=250, null=False, blank=False)
     quantity = models.IntegerField(null=False, blank=False)
     original_price = models.FloatField(null=False, blank=False)
@@ -52,6 +54,10 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+        
+    def get_absolute_url(self):
+        return reverse('productview', kwargs={"cate_slug": self.category.slug, "prod_slug": self.slug})
+    
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
