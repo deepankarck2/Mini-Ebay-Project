@@ -5,7 +5,7 @@
 <img src="https://user-images.githubusercontent.com/52084764/203933545-c9dfdf72-c5ba-44d6-8ec3-76c1e9452b17.png" height=780px width=710px>
 
 
-# An Electronic Trading System (Mini-Ebay)
+# An Electronic Trading System aka (Mini-Ebay)
 #### We want to develop electronic trading such that every responsible user can trade their items. There are three types of users to this system: 
 1. Superusers (SUs), 
 2. Ordinary users (OUs),and 
