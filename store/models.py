@@ -58,11 +58,43 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('productview', kwargs={"cate_slug": self.category.slug, "prod_slug": self.slug})
     
-
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_quantity = models.IntegerField(null=False, blank=False)
     created_at = models.DateField( auto_now_add=True)
 
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
+    first_name = models.CharField(null=True,blank=True, max_length=150)
+    last_name = models.CharField(null=True,blank=True, max_length=150)
+    phone = models.CharField(null=True,blank=True, max_length=50)
+    address = models.CharField(null=True,blank=True, max_length=150)
+    city = models.CharField(null=True,blank=True, max_length=80)
+    state = models.CharField(null=True,blank=True, max_length= 80)
+    country = models.CharField(null=True,blank=True, max_length=80)
+    zip_code = models.CharField(null=True,blank=True, max_length=50)
+    total_price = models.FloatField(null=False)
+    payment_id = models.CharField(max_length=150, null=True)
+    orderStatuses = (
+        ('Pending', "Pending"),
+        ('Out for shipping', 'Out for Shipping'),
+        ('Completed', 'Completed'),
+    )
+    status = models.CharField(max_length=150, choices=orderStatuses, default='Pending')
+    message = models.TextField(null=True)
+    tracking_number = models.CharField(max_length=150, null=True)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'{self.id} - {self.tracking_number}'
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    price = models.FloatField(null=False)
+    quantity = models.IntegerField(null=False)
+
+    def __str__(self):
+        return f'{self.order.id} - {self.product.slug}'
