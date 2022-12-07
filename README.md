@@ -14,7 +14,7 @@
 ## An Super User can perform the tasks below:
 
 - [X] 1.Process applications and decide who can be OU and who should be denied with justifications.
-- [ ] 2.Process itemsthe OUs submitted intending to sell, some can be publicly available on the system and some may be deniedand communicated to the OU.
+- [X] 2.Process items the OUs submitted intending to sell, some can be publicly available on the system and some may be deniedand communicated to the OU.
 - [ ] 3.Send warnings to OUs who received two complaints or the average grade is lower than 2 with at least 3 evaluators, should an OU receive two warnings this OU should be removed from the system automatically.
   - [X] The SU has the power to remove any OU(s) with justifications at any time.
 - [ ] 4.Collect transaction statistics for a certain period (a day or a week) and/or a certain OU(s). 
@@ -33,7 +33,7 @@
 
 
 ## A GU can do the following tasks:
-- [ ] 1.Browse/search available items based on title, keywords, price range, and ratings; 
+- [X] 1.Browse/search available items based on title, keywords, price range, and ratings; 
 - [ ] 2.Report to SU about the suspicious items (stolen) s/he spot from the site, if proven true the SU will remove the item and the CU who posted it and generate a report to be sent to police;
 - [X] 3.Apply to be an OU
 
