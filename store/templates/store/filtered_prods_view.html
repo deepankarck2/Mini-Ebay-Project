@@ -1,3 +1,18 @@
-<h1> Hello There! </h1>
-<p> {% lorem 2 b random %}
-    
+<div class="cards">
+    {% for item in products %}
+            <div class="card"> 
+                <a href="{% url 'productview' item.category.slug item.slug %}" class="cat_link">
+                    <div>
+                        <img class="image" src="{{ item.product_image.url }}" alt="product-image">
+                    </div>
+                    <div>
+                        <h4>{{ item.name }}</h4>
+                    </div>
+                    <div>
+                        <span>Original:$ {{item.original_price}}<span>
+                        <span>Bidding:$ {{item.bidding_price}}<span>
+                    </div>
+                </a>
+            </div>
+    {% endfor %}
+</div>
