@@ -1,0 +1,72 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+    <div class='search-wrap' style="padding:30px">
+        <div class="l-search"> 
+            <div><h3>Filters<h4> <hr></div>
+                <form>
+                    {% csrf_token %}
+                    
+                    <div>
+                        <label for='search-title'>Title</label >
+                        <input id='search-title' tpye='text' placeholder='Input title'>
+                    </div>
+                    
+                    <div>
+                        <label for='search-keyword'>Keyword</label >
+                        <input id='search-keyword' tpye='text' placeholder='Input Keyword'>
+                    </div>
+
+                    <div class="pri-sear">
+                        <div>
+                            <label for='search-min'>Min Price</label >
+                            <input id='search-min' tpye='text'>
+                        </div>
+
+                        <div>
+                            <label for='search-max'>Max Price</label >
+                            <input id='search-max' tpye='text'>
+                        </div>
+                    </div>
+                    
+                    <div class="slid-sear">
+                        <label for="sear-slider">Rating</label>
+                        <input type="range" min="1" max="5" value="50" id="search-slider">
+                    </div>
+                    <div class="sub-sear">
+                        <button id='search-submit'>Search </button>
+                    </div>
+                </form>
+        </div>
+        
+        <div class="r-search">
+            <div><h3>Products</h3><hr></div>
+            <div id="filteredProducts"> 
+                
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}
+
+{% comment "" %}
+            <form id="checkboxes">
+                {% csrf_token %}
+                <input class="ck-box" type="checkbox" id="vehicle1" name="Category" value="Bike">
+                <label for="vehicle1"> I have a bike</label><br>
+
+                <input class="ck-box" type="checkbox" id="vehicle8" name="Category" value="Deep">
+                <label for="vehicle8"> I have a bike</label><br>
+
+                <input class="ck-box" type="checkbox" id="vehicle2" name="Keyword" value="Car">
+                <label for="vehicle2"> I have a car</label><br>
+
+                <input class="ck-box" type="checkbox" id="vehicle3" name="Price" value="Boat">
+                <label for="vehicle3"> I have a boat</label><br><br>
+
+                <input class="ck-box" type="checkbox" id="vehicle10" name="Price" value="Gun">
+                <label for="vehicle10"> I have a boat</label>
+
+                <button class="search-submit"> Submit</button>
+            </form>
+{% endcomment %}
