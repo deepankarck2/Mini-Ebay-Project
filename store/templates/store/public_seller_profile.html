@@ -35,7 +35,7 @@
                 {% if user.is_authenticated %}
                 <div class="review_header"><h3>Write Your Review</h3></div>
                 <form method="POST" action="{% url 'submit_review' seller.user.id  %}" class="review_rate_form">
-                    {% csrf_token %}
+                    {% csrf_token %}    
                     <div>
                         <!-- Rating stars -->
                         <div>

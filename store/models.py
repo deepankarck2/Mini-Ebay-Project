@@ -42,7 +42,8 @@ class Product(models.Model):
     small_description = models.TextField(max_length=250, null=False, blank=False)
     quantity = models.IntegerField(null=False, blank=False)
     original_price = models.FloatField(null=False, blank=False)
-    bidding_price = models.FloatField(null=False, blank=False)
+    bid_starting_price = models.FloatField(null=False, blank=False)
+    bid_current_price = models.FloatField(null=True, blank=True)
     description = models.TextField(max_length=500, null=False, blank=False)
     status = models.BooleanField(default= False, help_text="0=Default, 1=Hidden")
     trending = models.BooleanField(default= False, help_text="0=Default, 1=Hidden")
@@ -98,3 +99,15 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.order.id} - {self.product.slug}'
+
+class Bid(models.Model):
+    bidder = models.ForeignKey(User, on_delete=models.CASCADE)
+    bidding_price = models.FloatField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    orderStatuses = (
+        ('Pending', "Pending"),
+        ('Bid_Accepted', 'Bid_Accepted'),
+        ('Bid_Rejected', 'Bid_Rejected'),
+    )
+    bid_status = models.CharField(max_length=150, choices=orderStatuses, default='Pending')
+    quantity = models.IntegerField(null=False)
