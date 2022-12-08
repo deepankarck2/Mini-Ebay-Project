@@ -51,15 +51,6 @@
                 </ul>
             </div>
         </section>
-        {% if messages %}
-        <div class='section-p1'>
-            {% if messages %}
-                {% for message in messages %}
-                    <div> {{ message }}<div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        {% endif %}
         {% block content %}
         
         {% endblock content %}
