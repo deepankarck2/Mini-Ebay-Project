@@ -45,7 +45,8 @@ class Product(models.Model):
     bid_starting_price = models.FloatField(null=False, blank=False)
     bid_current_price = models.FloatField(null=True, blank=True)
     description = models.TextField(max_length=500, null=False, blank=False)
-    status = models.BooleanField(default= False, help_text="0=Default, 1=Hidden")
+    status = models.BooleanField(default= False, help_text="0=Show, 1=Hidden")
+    bid_status = models.BooleanField(default= False, help_text="0=Show, 1=Hidden")
     trending = models.BooleanField(default= False, help_text="0=Default, 1=Hidden")
     tag = models.CharField(max_length=150, null=False, blank=False)
     meta_title = models.CharField(max_length=150, null=False, blank=False)
@@ -111,3 +112,9 @@ class Bid(models.Model):
     )
     bid_status = models.CharField(max_length=150, choices=orderStatuses, default='Pending')
     quantity = models.IntegerField(null=False)
+
+class Report(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name="Product Owner", on_delete=models.CASCADE)
+    subject = models.CharField(max_length=150, help_text="Suject of the report", blank=False)
+    body = models.TextField(max_length=500, blank=True, null=True)
