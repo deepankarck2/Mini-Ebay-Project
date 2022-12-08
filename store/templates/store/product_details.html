@@ -21,6 +21,11 @@
             <p  class="small_description">{{products.small_description}} </p>
             <hr>
             <p class="prod_description">{{products.description}}</p>
+            <div class="seller-info" style="margin-top:15px;">
+                <p>Seller</p>
+                <img src="{{products.author.account.image.url }}" width="50px" height="50px" style="border-radius:50%; margin-top:15px;">
+                <a href="{% url 'public-seller-profile' products.author.pk %}"><p>{{ products.author }} </p></a>
+            </div>
             <div class="prices">
                 <p class="price"> Original Price: $ {{ products.original_price }} </p> 
                 <p class="bid_price"> Bidding Price: $ {{ products.bidding_price }} </p> 

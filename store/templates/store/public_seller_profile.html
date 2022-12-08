@@ -1,0 +1,49 @@
+{% extends "store/base.html" %}
+{% block content %}
+<div class="section-p1">
+    <h2>Products sold by this user:</h2>
+    <hr>
+    {% if model_one %}
+        <div class="">
+            {% for item in model_one %}
+                {{ item }}
+                <br>
+            {% endfor %}
+
+            <span class="">
+                {% if model_one.has_previous %}
+                    <a href="?page1={{ model_one.previous_page_number }}"> previous </a>
+                {% endif %}
+                <span class="">
+                    Page {{ model_one.number }} of {{ model_one.paginator.num_pages }}
+                </span>
+                {% if model_one.has_next %}
+                    <a href="?page1={{ model_one.next_page_number }}"> next </a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+
+        <br>
+        <br> 
+
+    {% if model_two %}
+    <div class="col-md-12 well">
+        {% for item in model_two %}
+            {{ item }}
+        {% endfor %}
+        <span class="step-links pagination">
+            {% if model_two.has_previous %}
+                <a href="?page2={{ model_two.previous_page_number }}"> previous </a>
+            {% endif %}
+            <span class="current">
+                Page {{ model_two.number }} of {{ model_two.paginator.num_pages }}
+            </span>
+            {% if model_two.has_next %}
+                <a href="?page2={{ model_two.next_page_number }}"> next </a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

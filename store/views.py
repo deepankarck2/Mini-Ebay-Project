@@ -8,6 +8,7 @@ import json
 import operator
 from django.db.models import Q
 import functools
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def home(request):
     return render(request, 'store/home.html')
@@ -86,7 +87,31 @@ def search(request):
 
     return render(request, 'store/search.html')
 
+def public_seller_profile(request, pk):
 
+    Model_one = Product.objects.filter(author__pk=pk).order_by('id')
+    paginator = Paginator(Model_one, 5)
+    page = request.GET.get('page1')
+    try:
+        Model_one = paginator.page(page)
+    except PageNotAnInteger:
+        Model_one = paginator.page(1)
+    except EmptyPage:
+        Model_one = paginator.page(paginator.num_pages)
+
+    Model_two = Product.objects.all().order_by('id')
+    paginator = Paginator(Model_two, 3)
+    page = request.GET.get('page2')
+    try:
+        Model_two = paginator.page(page)
+    except PageNotAnInteger:
+        Model_two = paginator.page(1)
+    except EmptyPage:
+        Model_two = paginator.page(paginator.num_pages)
+
+    context = {'model_one': Model_one, 'model_two': Model_two}
+
+    return render(request, 'store/public_seller_profile.html', context)
 
 
 

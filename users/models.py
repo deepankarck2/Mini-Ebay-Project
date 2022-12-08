@@ -25,7 +25,7 @@ class Account(models.Model):
     warnings = models.IntegerField(default=0)
 
     def __str__(self) -> str:
-        return f'{self.user.username} Profile'
+        return f'{self.user.pk} - {self.user.username} Profile'
     
     def save(self, *args, **kwargs):
         super().save()
@@ -36,3 +36,6 @@ class Account(models.Model):
             output_size = (300,300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+class ReviewRating(models.Model):
+    pass
