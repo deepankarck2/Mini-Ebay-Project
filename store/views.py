@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Category, Product, Cart
+from users.models import ReviewRating, Account
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
@@ -9,6 +10,8 @@ import operator
 from django.db.models import Q
 import functools
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .controller.forms import ReviewForm
+
 
 def home(request):
     return render(request, 'store/home.html')
@@ -90,7 +93,8 @@ def search(request):
 def public_seller_profile(request, pk):
 
     Model_one = Product.objects.filter(author__pk=pk).order_by('id')
-    paginator = Paginator(Model_one, 5)
+    paginator = Paginator(Model_one, 3)
+
     page = request.GET.get('page1')
     try:
         Model_one = paginator.page(page)
@@ -99,7 +103,8 @@ def public_seller_profile(request, pk):
     except EmptyPage:
         Model_one = paginator.page(paginator.num_pages)
 
-    Model_two = Product.objects.all().order_by('id')
+    all_review = ReviewRating.objects.all().order_by('id')
+    Model_two = all_review.filter(review_receiver__pk = pk)
     paginator = Paginator(Model_two, 3)
     page = request.GET.get('page2')
     try:
@@ -109,11 +114,38 @@ def public_seller_profile(request, pk):
     except EmptyPage:
         Model_two = paginator.page(paginator.num_pages)
 
-    context = {'model_one': Model_one, 'model_two': Model_two}
+    seller = Account.objects.filter(user__id=pk).first()
+    context = {
+        'model_one': Model_one, 
+        'model_two': Model_two,
+        'seller' : seller,
+        }
 
     return render(request, 'store/public_seller_profile.html', context)
 
-
+def submit_review(request, user_id):
+    url = request.META.get('HTTP_REFERER')
+    print(request.method)
+    if request.method == 'POST':
+        try:
+            reviews = ReviewRating.objects.get(review_giver__id = request.user.id, review_receiver__id = user_id)
+            form = ReviewForm(request.POST, instance=reviews)
+            form.save()
+            messages.success(request, "Your review has been updated!")
+            return redirect(url)
+        except ReviewRating.DoesNotExist:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                data = ReviewRating()
+                data.subject = form.cleaned_data['subject']
+                data.rating = form.cleaned_data['rating']
+                data.review = form.cleaned_data['review']
+                data.review_receiver_id = user_id
+                data.review_giver_id = request.user.id
+                data.save()
+                messages.success(request, "Your review has been submitted!")
+                return redirect(url)
+    return redirect(url)
 
 
 # def search1(request):
