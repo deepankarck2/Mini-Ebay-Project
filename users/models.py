@@ -38,4 +38,15 @@ class Account(models.Model):
             img.save(self.image.path)
 
 class ReviewRating(models.Model):
-    pass
+    review_receiver = models.ForeignKey(User, on_delete=models.CASCADE,  related_name='for_receiver')
+    review_giver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='for_giver')
+    subject = models.CharField(max_length=100, blank=True)
+    review = models.TextField(max_length=500, blank=True)
+    rating = models.FloatField()
+    status = models.BooleanField(default=True, help_text="True=Show, False=Don't Show")
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_data = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'Review For- {self.review_receiver} - From {self.review_giver}'
+

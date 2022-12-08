@@ -16,4 +16,6 @@ urlpatterns = [
     path('<int:pk>/delete_product/', product_modify.ProductDeleteView.as_view(), name="product-delete"), 
     path('search/', views.search, name='search'),
     path('seller-profile/<int:pk>/', views.public_seller_profile, name="public-seller-profile"),
+
+    path('submit_review/<int:user_id>/', views.submit_review, name="submit_review"), 
 ]

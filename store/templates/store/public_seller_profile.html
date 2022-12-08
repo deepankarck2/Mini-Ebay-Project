@@ -1,7 +1,7 @@
 {% extends "store/base.html" %}
 {% block content %}
 <div class="section-p1">
-    <h2>Products sold by this user:</h2>
+    <h2>Products sold by this user-{{ seller.user.username }}:</h2>
     <hr>
     {% if model_one %}
         <div class="">
@@ -32,26 +32,27 @@
     
         <div id="demo-modal" class="modal">
             <div class="modal__content">
+                {% if user.is_authenticated %}
                 <div class="review_header"><h3>Write Your Review</h3></div>
-                <form action="" metod="POST">
+                <form method="POST" action="{% url 'submit_review' seller.user.id  %}" class="review_rate_form">
                     {% csrf_token %}
                     <div>
                         <!-- Rating stars -->
                         <div>
-                            <label class="">How do you rate the product?</label>
+                           <div><label>How do you rate the product?</label></div>
                             <div class="review_rate">
-                                <input type="radio" name="rev_rating" id="rating10" value="5" required/> <label for="rating10" title="5"></label>
-                                <input type="radio" name="rev_rating" id="rating9" value="4.5" required/> <label for="rating9" title="4.5"></label>
-                                <input type="radio" name="rev_rating" id="rating8" value="4" required/> <label for="rating8" title="4"></label>
-                                <input type="radio" name="rev_rating" id="rating7" value="3.5" required/> <label for="rating7" title="3.5"></label>
-                                <input type="radio" name="rev_rating" id="rating6" value="3" required/> <label for="rating6" title="3"></label>
-                                <input type="radio" name="rev_rating" id="rating5" value="2.5" required/> <label for="rating5" title="2.5"></label>
-                                <input type="radio" name="rev_rating" id="rating4" value="2" required/> <label for="rating4" title="2"></label>
-                                <input type="radio" name="rev_rating" id="rating3" value="1.5" required/> <label for="rating3" title="1.5"></label>
-                                <input type="radio" name="rev_rating" id="rating2" value="1" required/> <label for="rating2" title="1"></label>
-                                <input type="radio" name="rev_rating" id="rating1" value="0.5" required/> <label for="rating1" title="0.5"></label>
+                                <input type="radio" name="rating" id="rating10" value="5" required/> <label for="rating10" title="5"></label>
+                                <input type="radio" name="rating" id="rating9" value="4.5" required/> <label for="rating9" class="half" title="4.5"></label>
+                                <input type="radio" name="rating" id="rating8" value="4" required/> <label for="rating8" title="4"></label>
+                                <input type="radio" name="rating" id="rating7" value="3.5" required/> <label for="rating7" class="half" title="3.5"></label>
+                                <input type="radio" name="rating" id="rating6" value="3" required/> <label for="rating6" title="3"></label>
+                                <input type="radio" name="rating" id="rating5" value="2.5" required/> <label for="rating5" class="half" title="2.5"></label>
+                                <input type="radio" name="rating" id="rating4" value="2" required/> <label for="rating4" title="2"></label>
+                                <input type="radio" name="rating" id="rating3" value="1.5" required/> <label for="rating3" class="half" title="1.5"></label>
+                                <input type="radio" name="rating" id="rating2" value="1" required/> <label for="rating2" title="1"></label>
+                                <input type="radio" name="rating" id="rating1" value="0.5" required/> <label for="rating1" class="half" title="0.5"></label>
                             </div>
-                        </div
+                        </div>
 
                         <label for="subject">Review Title </label>
                         <input type="text" class="review_subject" name="subject">
@@ -64,6 +65,9 @@
                         <input type="submit" class="review_submit" value="Submit Review">
                     </div>
                 </form>
+                {% else %}
+                    <div> Please login/create an account for rating!</div>
+                {% endif %}
                 <a href="#" class="modal__close">&times;</a>
             </div>
         </div>
@@ -75,6 +79,7 @@
     <div class="col-md-12 well">
         {% for review in model_two %}
             <h3>{{ review.subject }}</h3>
+            <h4>Rating: {{ review.rating }}/5 </h4>
             <p> {{ review.review }}</p>
             <br>
         {% endfor %}
