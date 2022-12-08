@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  
   $('.increaseValue').click(function(e){
     e.preventDefault();
     var val_str = $(this).closest('.product_data').find('.quan_input').val();
@@ -89,5 +89,60 @@ $(document).ready(function(){
     })
     
   })
+
+  //Search
+  // $('.ck-box').on('click', function(e){
+  //   var selected = [];
+  //   let filterobj = {}; 
+  //   $('#checkboxes input[type=checkbox]').each(function() {
+  //      if ($(this).is(":checked")) {
+  //       let add = (obj, key, val) => {
+  //         if (key in obj) obj[key] = [].concat(obj[key], val);
+  //         else obj[key] = val;
+  //       }
+  //       console.log(filterobj);
+  //       add(filterobj, $(this).attr('name'), $(this).val())        
+  //      }
+  //   });
+
+  //   $.ajax({
+  //     url:'/search1',
+  //     data: filterobj,
+  //     success: function(res){
+  //       //console.log(res.status);
+  //     }
+  //   })
+  // });
+
+  $('#search-submit').click( e => {
+    e.preventDefault();
+    
+    const token = $('input[name=csrfmiddlewaretoken]').val();
+    const title = $('#search-title').val().split(",");
+    const keyword = $('#search-keyword').val().split(",");
+    const min_price = $('#search-min').val();
+    const max_price = $('#search-max').val();
+    const rating = $('#search-slider').val();
+
+    //console.log(title);
+    console.log(keyword);
+
+    $.ajax({
+      url: "/search",
+      data: {
+        'title' : title,
+        'keyword' : keyword,
+        'min_price' : min_price,
+        'max_price' : max_price,
+        'rating' : rating,
+      },
+      success: (response) =>{
+         $("#filteredProducts").html(response.data);
+          //console.log(response.data);
+      }
+    })
+
+})
+
 });
 

@@ -1,0 +1,35 @@
+.search-wrap{
+    display: flex;
+    flex-direction: row;
+}
+
+.l-search{
+    width: 25%;
+    height: 500px;
+    padding: 10px;
+}
+
+.r-search{
+    width: 60%;
+    padding: 10px;
+}
+.pri-sear{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.slid-sear{
+    margin-top: 10px;
+}
+
+#sear-slider{
+    margin-top: 3px;
+}
+
+.sub-sear{
+    padding-top: 10px;
+}
+#search-submit{
+    font-size: 20px;
+}

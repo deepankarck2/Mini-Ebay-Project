@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from .models import Category, Product, Cart
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, JsonResponse
+from django.template.loader import render_to_string
+import json
+import operator
+from django.db.models import Q
+import functools
 
 def home(request):
     return render(request, 'store/home.html')
@@ -49,3 +55,72 @@ def viewcart(request):
        'cart': cart
     }
     return render(request, 'store/cart.html', context)
+
+def search(request):
+    if request.GET:
+        myDict = dict(request.GET)
+        print(myDict)
+        
+        title = myDict['title[]'] if 'title[]' in myDict else None
+        keyword = myDict['keyword[]'] if 'keyword[]' in myDict else None
+
+        print(title)
+        print(keyword)
+        filter_prods = Product.objects.all()
+
+        query = functools.reduce(operator.or_, (Q(name__contains = item) for item in title))
+        filter_prods = filter_prods.filter(query)
+        
+        print(filter_prods)
+
+        if len(keyword) > 0:
+            query = functools.reduce(operator.or_, (Q(meta_keywords__contains = item) for item in keyword))
+            filter_prods = filter_prods.filter(query)
+        
+
+        context = {
+            'products' : filter_prods
+        }
+        products = render_to_string('store/filtered_prods_view.html', context)
+        return JsonResponse({'data' : products})
+
+    return render(request, 'store/search.html')
+
+
+
+
+
+
+# def search1(request):
+#     if request.GET:
+#         mydict = dict(request.GET)
+#         title = mydict['title'][0]
+        # if('keyword[]' in myDict):
+        #     keyword = myDict['keyword[]']
+
+        # if('title[]' in myDict):
+        #     title = myDict['title[]']
+#         products = Product.objects.filter(meta_keywords__contains=title)
+
+
+        # if('title' in myDict):
+        #     title = myDict['title']
+        # elif ('title[]' or 'title' not in myDict):
+        #     title = []
+            
+
+        # if('keyword' in myDict):
+        #     keyword = myDict['keyword']
+        # elif ('keyword[]' or 'keyword' not in myDict):
+        #     keyword = []
+
+#         print(products)
+#         context = {
+#          'products': products,
+#         }
+
+        # if title:
+        #     filter_prods = Product.objects.filter(name__icontains=title[0])
+        #     print(filter_prods)
+#         return render(request, 'store/search.html', context)
+#     return render(request, 'store/search.html')

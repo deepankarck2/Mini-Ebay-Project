@@ -38,6 +38,8 @@ urlpatterns = [
     path('delete-cart-item', cart.deleteCartItem, name="deleteCartItem"),
 
     path('checkout', checkout.checkoutitem, name="checkout"),
+    path('place-order', checkout.placeorder, name="placeorder"),
+
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
