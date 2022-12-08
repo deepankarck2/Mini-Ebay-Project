@@ -1,7 +1,47 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import JsonResponse
-from store.models import Product, Cart
+from store.models import Product, Cart, Bid
+from django.contrib.auth.decorators import login_required
+
+def placebid(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            product_id = int(request.POST.get('product_id'))
+            product_check = Product.objects.get(id=product_id)
+            if(request.POST.get('user_bid_amount')):
+                user_bid_amount = int(request.POST.get('user_bid_amount'))
+            else:
+                return JsonResponse({'status': 'Enter a valid amount!'})
+            if(product_check):
+                starting_bid = product_check.bid_starting_price
+                current_bid = product_check.bid_current_price
+                product_quantity = int(request.POST.get('prod_quantity'))
+
+                if(product_quantity <= 0):
+                    return JsonResponse({'status': 'Given 0: Pls Add 1 or more items.'})
+                elif(product_check.quantity >= product_quantity):
+                    if(current_bid == None):
+                        if(user_bid_amount >= starting_bid):
+                            product_check.bid_current_price = user_bid_amount
+                            product_check.save()
+                            Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
+                            return JsonResponse({'status': "Product bid successfully"})
+                        else:
+                            return JsonResponse({'status': 'Please enter higher bid.'})
+                    elif(user_bid_amount < current_bid):
+                        return JsonResponse({'status': 'Please enter higher bid.'})
+                    elif(user_bid_amount > current_bid):
+                        Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
+                        product_check.bid_current_price = user_bid_amount
+                        return JsonResponse({'status': "Product bid successfully"})
+            else:
+                return JsonResponse({'status': "No such product found"})
+        else:
+            return JsonResponse({'status': "Login to Continue"})
+
+    return redirect('/')
+
 
 def addtocart(request):
     if request.method == 'POST':
@@ -14,7 +54,6 @@ def addtocart(request):
                     return JsonResponse({'status': "Product is already in cart"})
                 else:
                     product_quantity = int(request.POST.get('prod_quantity'))
-                    print("Pro quan: ", product_quantity)
                     if(product_quantity <= 0):
                         return JsonResponse({'status': 'Given 0: Pls Add 1 or more items.'})
                     elif(product_check.quantity >= product_quantity):
@@ -22,7 +61,6 @@ def addtocart(request):
                         return JsonResponse({'status': "Product added successfully"})
 
                     else:
-                        print("HEREEEE")
                         mes = "Only " + str(product_check.quantity) + " products are available"
                         return JsonResponse({'status': mes})
             else:

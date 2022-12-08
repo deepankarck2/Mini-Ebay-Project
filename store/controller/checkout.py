@@ -74,6 +74,8 @@ def placeorder(request):
 
     return redirect('/')
 
+
+
     # orderStatuses = (
     #     ('Pending', "Pending"),
     #     ('Out for shipping', 'Out for Shipping'),
