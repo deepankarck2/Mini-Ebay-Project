@@ -137,8 +137,9 @@ $(document).ready(function(){
         'rating' : rating,
       },
       success: (response) =>{
+        console.log(response.data);
          $("#filteredProducts").html(response.data);
-          //console.log(response.data);
+          
       }
     })
 
