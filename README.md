@@ -27,7 +27,8 @@
 - [X] 4.Submit the information (a picture or video, title, key words, time limit, price range) of the item(s) s/he wants to sell. 
 - [ ] 5.Sell the item(s)s/he posted, the OUmay choose whom to sell, if not the highest bidder was chosen, a reason must be provided.
 - [ ] 6.File complaints to SUs against certain OUs whose item s/he purchased has some problem.
-- [ ] 7.Grade an OU after buying an item from him/her, 1 being the worst and 5 being the best. Any OU making 3 1 (worst) or 5(best) rating to others, the OU must see the SU to make sure there is no problem, a warning or removal could ensure based on SU’s judgment.
+- [X] 7.Grade an OU after buying an item from him/her, 1 being the worst and 5 being the best. 
+  - [ ] 7.1 Any OU making 3 1 (worst) or 5(best) rating to others, the OU must see the SU to make sure there is no problem, a warning or removal could ensure based on SU’s judgment.
 - [ ] 8.See his/her own transaction history.
 - [ ] 9.Change his/her password, name, address, phone,and credit card number.
 
