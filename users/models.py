@@ -50,3 +50,9 @@ class ReviewRating(models.Model):
     def __str__(self):
         return f'Review For- {self.review_receiver} - From {self.review_giver}'
 
+class UserBlacklist(models.Model):
+    username = models.CharField(unique=True,max_length=30) 
+    email = models.CharField(unique=True,max_length=100)
+
+    def __str__(self):
+        return f'Black listed {self.username} - {self.email}' 
