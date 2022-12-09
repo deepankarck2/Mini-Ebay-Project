@@ -5,6 +5,7 @@ from store.models import Product, Cart, Bid
 from django.contrib.auth.decorators import login_required
 
 def placebid(request):
+    url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
         if request.user.is_authenticated:
             product_id = int(request.POST.get('product_id'))
@@ -26,15 +27,27 @@ def placebid(request):
                             product_check.bid_current_price = user_bid_amount
                             product_check.save()
                             Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
-                            return JsonResponse({'status': "Product bid successfully"})
+                            return JsonResponse({'status': "Product bid successfully!", 'reload': 'true'})
                         else:
                             return JsonResponse({'status': 'Please enter higher bid.'})
-                    elif(user_bid_amount < current_bid):
+                    elif(user_bid_amount <= current_bid):
                         return JsonResponse({'status': 'Please enter higher bid.'})
                     elif(user_bid_amount > current_bid):
-                        Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
-                        product_check.bid_current_price = user_bid_amount
-                        return JsonResponse({'status': "Product bid successfully"})
+                        try:
+                            bid = Bid.objects.get(bidder__id = request.user.id, product__id = product_id)
+                            bid.bidder=request.user
+                            bid.bidding_price =user_bid_amount
+                            bid.product_id=product_id
+                            bid.quantity=product_quantity
+                            product_check.bid_current_price = user_bid_amount
+                            product_check.save()
+                            bid.save()
+                            return JsonResponse({'status': "Your bid has been updated!", 'reload': 'true'})
+                        except Bid.DoesNotExist:
+                            Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
+                            product_check.bid_current_price = user_bid_amount
+                            product_check.save()
+                            return JsonResponse({'status': "Product bid successfully!", 'reload': 'true'})
             else:
                 return JsonResponse({'status': "No such product found"})
         else:
