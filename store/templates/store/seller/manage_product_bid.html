@@ -1,6 +1,5 @@
 {% extends "store/base.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
 {% block content %}
     <div class="section-p1">
         <p><a href="{% url 'manage_bids' %}">Manage Bids</a>/<a href="{% url 'manage_product_bid' product.slug %}">seller_bid_product</a><p> 
@@ -24,13 +23,18 @@
             <div class="buyer_account_detail">
                 {% if seller_bid_product_items %}
                     {% for seller_bid_product_item in seller_bid_product_items %}
+                    <div class="bid_prod_info">
+                        {% csrf_token %}
+                        <input  class="bid_id_num" type="hidden" value="{{seller_bid_product_item.id}}">
                         <p>{{ seller_bid_product_item.product }}</p>
                         <p>{{ seller_bid_product_item.bidder }}</p>
                         <p>{{ seller_bid_product_item.product.bid_starting_price }}</p>
                         <p>{{ seller_bid_product_item.bidding_price }}</p>
                         <p>{{ seller_bid_product_item.quantity }}</p>
+                        <button class="bid_confirm_btn" value={{seller_bid_product_item.id}}>Confirm Bid</button>
                         <br> 
                         <br>
+                    </div> 
                     {% endfor %}
                 {% else %}
                     <p>Something wrong!. Please go back to manage bid page. </p>
