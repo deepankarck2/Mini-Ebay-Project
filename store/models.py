@@ -80,7 +80,7 @@ class Order(models.Model):
     payment_id = models.CharField(max_length=150, null=True)
     orderStatuses = (
         ('Pending', "Pending"),
-        ('Out for shipping', 'Out for Shipping'),
+        ('Outforshipping', 'Out for Shipping'),
         ('Completed', 'Completed'),
     )
     status = models.CharField(max_length=150, choices=orderStatuses, default='Pending')

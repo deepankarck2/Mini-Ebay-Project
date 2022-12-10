@@ -32,4 +32,5 @@ urlpatterns = [
     path('seller-account/', views.seller_account, name="seller_account"),
     path('manage-bids/', views.manage_bids, name="manage_bids"),
     path('manage-product-bid/<str:slug>/', views.manage_product_bid, name="manage_product_bid"),
+    path('confirm-bid-sell-prod', views.confirm_bid_sell_prod, name="confirm_bid_sell_prod"),
 ]

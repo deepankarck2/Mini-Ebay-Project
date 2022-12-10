@@ -9,7 +9,8 @@ admin.site.register(Order)
 admin.site.register(OrderItem)
 
 class BidAdmin(admin.ModelAdmin):
-    readonly_fields = ('date',)
+    readonly_fields = ('created_at',)
+
 admin.site.register(Bid, BidAdmin)
 
 admin.site.register(Report)

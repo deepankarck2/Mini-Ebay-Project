@@ -274,12 +274,12 @@ def confirm_bid_sell_prod(request):
         bid_total_price = bid_quantity * selected_product_price
 
         newOrder.total_price = bid_total_price
-
+        newOrder.status = 'Outforshipping'
         tracking_num = "Xh&y" + str(random.randint(1111111, 9999999))
         while Order.objects.filter(tracking_number = tracking_num) is None:
             tracking_num = "Xh&y" + str(random.randint(1111111, 9999999))
         newOrder.tracking_number = tracking_num
-
+  
         newOrder.save() 
         
         bid_order_item = product
