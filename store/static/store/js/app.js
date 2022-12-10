@@ -20,6 +20,33 @@ $(document).ready(function(){
     }
   })
 
+    $('#bidbtn').click( function(e){    
+      e.preventDefault();
+      var prod_id = $(e.currentTarget).closest('.product_data').find('.id_prod').val();
+      var prod_quantity =  $(e.currentTarget).closest('.product_data').find('.quan_input').val();
+      var token = $('input[name=csrfmiddlewaretoken]').val();
+      var user_bid_amount = $('#user_bid_amount').val();
+
+      $.ajax({
+        method : "POST",
+        url: "/place-bid",
+        data: {
+          'product_id' : prod_id,
+          'prod_quantity' : prod_quantity,
+          'user_bid_amount' : user_bid_amount,
+           csrfmiddlewaretoken : token
+        },
+        success: (response) =>{
+            res = response
+            console.log(res);
+            alertify.success(res.status);
+            if(res.reload){
+              $(".bid_section").load(location.href + " .bid_section");
+            }
+        }
+      })
+    })
+
   $('#addToCartBtn').click( e => {
       e.preventDefault();
       var prod_id = $(e.currentTarget).closest('.product_data').find('.id_prod').val();
@@ -36,7 +63,7 @@ $(document).ready(function(){
            csrfmiddlewaretoken : token
         },
         success: (response) =>{
-          res = response
+            res = response
             console.log(res);
             alertify.success(res.status);
         }
@@ -145,5 +172,13 @@ $(document).ready(function(){
 
 })
 
+
+  $('.buyer_account_options li').click(function() {
+    $('.buyer_account_options li.profile_active').removeClass('profile_active');
+    $(this).addClass('profile_active');
+
+
+  });
+  
 });
 

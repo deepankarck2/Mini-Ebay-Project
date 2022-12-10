@@ -1,0 +1,41 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="section-p1">
+        <p><a href="{% url 'manage_bids' %}">Manage Bids</a>/<a href="{% url 'manage_product_bid' product.slug %}">seller_bid_product</a><p> 
+        <h2>Seller- Manage Bids</h2>
+        <div class="buyer_account_page">
+            <div class="buyer_profile">
+                <div class="buyer_profile_detail">
+                    <img src="{{ user.account.image.url }}"> 
+                    <h2> {{ user.username }}</h2>
+                    <p> {{ user.email }} </p>
+                </div>
+                <br>
+                <ul class="buyer_account_options">
+                    <li><a href="{% url 'seller_account' %}"> Account <span> > </span></a></li>
+                    <li><a href="" class=""> My Listed Itmes<span> > </span></a></li>
+                    <li class="profile_active"><a href="{% url 'manage_bids' %}" class=""> Manage Bids  <span> > </span></a></li>
+                    <li><a href="" class=""> Transaction History  <span> > </span></a></li>
+
+                </ul>
+            </div>
+            <div class="buyer_account_detail">
+                {% if seller_bid_product_items %}
+                    {% for seller_bid_product_item in seller_bid_product_items %}
+                        <p>{{ seller_bid_product_item.product }}</p>
+                        <p>{{ seller_bid_product_item.bidder }}</p>
+                        <p>{{ seller_bid_product_item.product.bid_starting_price }}</p>
+                        <p>{{ seller_bid_product_item.bidding_price }}</p>
+                        <p>{{ seller_bid_product_item.quantity }}</p>
+                        <br> 
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <p>Something wrong!. Please go back to manage bid page. </p>
+                {% endif %}
+            </div>
+    </div>
+{% endblock content%}
+

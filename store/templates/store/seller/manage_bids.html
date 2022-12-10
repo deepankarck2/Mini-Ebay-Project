@@ -1,0 +1,66 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="section-p1">
+        <h2>Seller- Manage Bids</h2>
+        <div class="buyer_account_page">
+            <div class="buyer_profile">
+                <div class="buyer_profile_detail">
+                    <img src="{{ user.account.image.url }}"> 
+                    <h2> {{ user.username }}</h2>
+                    <p> {{ user.email }} </p>
+                </div>
+                <br>
+                <ul class="buyer_account_options">
+                    <li><a href="{% url 'seller_account' %}"> Account <span> > </span></a></li>
+                    <li><a href="" class=""> My Listed Itmes<span> > </span></a></li>
+                    <li class="profile_active"><a href="{% url 'manage_bids' %}" class=""> Manage Bids  <span> > </span></a></li>
+                    <li><a href="" class=""> Transaction History  <span> > </span></a></li>
+                </ul>
+            </div>
+            <div class="buyer_account_detail">
+                    <div class="right_seller_manage_bid"> 
+                        <div><h3>Bid Summary</h3></div>
+    
+                        <div>
+                            {% if seller_bid_products %}
+                            <table class="styled-table"> 
+                                <thead>
+                                    <tr>
+                                        <th>Image </th>
+                                        <th>Name</th>
+                                        <th>Original Price</th>
+                                        <th>Bidding Price</th>
+                                        <th>Current Bid Price</th>
+                                        <th>Manage Bid</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    {% for seller_bid_product in seller_bid_products %}
+                                        <tr>
+                                            <th>
+                                                <img src = "{{ seller_bid_product.product_image.url }}" height="50px" width = "50px"> 
+                                            </th> 
+                                            <th>{{ seller_bid_product  }}</th>
+                                            <th>{{ seller_bid_product.original_price }}</th>
+                                            <th>{{ seller_bid_product.bid_starting_price  }}</th>
+                                            <th>{{ seller_bid_product.bid_current_price  }}</th>
+                                            <th> <a href="{% url 'manage_product_bid' seller_bid_product.slug %}"><button class="button-54">Manage Bid</button></th></a>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table> 
+                            {% else %}
+                                <h4>You don't have any bids:</h4>
+                            {% endif %}
+                        <div> 
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock content%}
+
+
+{{ seller_bid_product.bid_starting_price }}

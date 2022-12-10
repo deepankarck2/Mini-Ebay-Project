@@ -52,7 +52,7 @@
                         <p>Current Bid: <strong> $ {{ products.bid_current_price }} </strong> </p>
                         <div>
                             <label for="user_bid_amount">Enter Bid Amount:</label>
-                            <input type="text" name="user_bid_amount" id="user_bid_amount"> <label>Enter {{ products.bid_current_price|default_if_none:products.bid_starting_price }} or more</label>
+                            <input type="text" name="user_bid_amount" id="user_bid_amount"> <label>Please enter more than {{ products.bid_current_price|default_if_none:products.bid_starting_price }}</label>
                         </div>
                         <button class="bid_btn" id="bidbtn">Place Bid <i class="fa fa-gavel"> </i></button>
                     </div>
@@ -67,7 +67,7 @@
                 <p> {{ products.id }} </p> 
 
                 <div class="report_prod">
-                    <button><a href="#demo-modal">Report Product</a></button>
+                    <button class="rep_prod_btn"><a href="#demo-modal"><i class="fa-solid fa-flag"></i> Report Product</a></button>
     
                     <div id="demo-modal" class="modal">
                         <div class="modal__content">
@@ -75,11 +75,11 @@
                             <form method="POST" action="{% url 'submit_report' products.slug %}" class="review_rate_form">
                                 {% csrf_token %}    
                                 <div>
-                                    <label for="subject">Review Title </label>
+                                    <label for="subject">Report Title </label>
                                     <input type="text" class="review_subject" name="subject">
                                     <br> 
 
-                                    <label for="body">Write Review </label>
+                                    <label for="body">Write Report </label>
                                     <textarea name="body" class="review_review" rows="4" maxlength=""></textarea>
                                     <br>
                                     <br>

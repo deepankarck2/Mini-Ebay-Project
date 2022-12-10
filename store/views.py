@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Category, Product, Cart
+from .models import Category, Product, Cart, Report, Bid, Order, OrderItem
+from users.models import User
 from users.models import ReviewRating, Account
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,8 +11,9 @@ import operator
 from django.db.models import Q
 import functools
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .controller.forms import ReviewForm
-
+from .controller.forms import ReviewForm, ReportForm
+from users.forms import UserRegisterForm, UserUpdateForm, AccountUpdateForm
+import random
 
 def home(request):
     return render(request, 'store/home.html')
@@ -125,7 +127,6 @@ def public_seller_profile(request, pk):
 
 def submit_review(request, user_id):
     url = request.META.get('HTTP_REFERER')
-    print(request.method)
     if request.method == 'POST':
         try:
             reviews = ReviewRating.objects.get(review_giver__id = request.user.id, review_receiver__id = user_id)
@@ -146,6 +147,158 @@ def submit_review(request, user_id):
                 messages.success(request, "Your review has been submitted!")
                 return redirect(url)
     return redirect(url)
+
+
+def submit_report(request, slug):
+    url = request.META.get('HTTP_REFERER')
+
+    if request.method == 'POST':
+        form = ReportForm(request.POST)
+        if form.is_valid():
+            report = Report()
+            product = Product.objects.filter(slug=slug).first()
+
+            report.product = product
+            report.user = product.author
+            report.subject = form.cleaned_data['subject']
+            report.body = form.cleaned_data['body']
+            report.save()
+            messages.success(request, "Your Report has been submitted!")
+            return redirect(url)
+        else:
+            messages.success(request, "Your please write a valid report!")
+            return redirect(url)
+    return redirect(url)
+
+# Buyer's Account
+def buyer_account(request):
+    if(request.method == 'POST'):
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = AccountUpdateForm(request.POST, request.FILES, instance=request.user.account)
+
+        if(u_form.is_valid() and p_form.is_valid()):
+            u_form.save()
+            p_form.save()
+
+            messages.success(request, f'Your Account has been updated')
+            return redirect('account')
+        else:
+            messages.success(request, f'Something is Wrong!!')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = AccountUpdateForm(instance=request.user.account)
+    
+    context = {
+        'u_form' : u_form,
+        'p_form' : p_form
+    }
+    return render(request, 'store/buyer/buyer_account.html', context)
+
+def buyer_purchase_history(request):
+    return render(request, 'store/buyer/buyer_purchase_history.html')
+
+def buyer_bidding_history(request):
+    curr_user = request.user
+    all_bids = Bid.objects.all()
+    curr_user_bids = all_bids.filter(bidder_id = curr_user.id)
+    context = {
+        'bids' : curr_user_bids
+    }
+    return render(request, 'store/buyer/buyer_bidding_history.html', context)
+
+# Seller's Account
+def seller_account(request):
+    if(request.method == 'POST'):
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = AccountUpdateForm(request.POST, request.FILES, instance=request.user.account)
+
+        if(u_form.is_valid() and p_form.is_valid()):
+            u_form.save()
+            p_form.save()
+
+            messages.success(request, f'Your Account has been updated')
+            return redirect('account')
+        else:
+            messages.success(request, f'Something is Wrong!!')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = AccountUpdateForm(instance=request.user.account)
+    
+    context = {
+        'u_form' : u_form,
+        'p_form' : p_form
+    }
+    return render(request, 'store/seller/seller_account.html', context)
+
+def manage_bids(request):
+    seller_bid_products = Bid.objects.filter(product__author__id = request.user.id)
+    seller_bid_products = Bid.objects.values('product').distinct()
+
+    seller_bid_products = Product.objects.filter(id__in = seller_bid_products)
+
+    context = {
+        'seller_bid_products': seller_bid_products
+    }
+    return render(request, 'store/seller/manage_bids.html', context)
+
+def manage_product_bid(request, slug):
+    seller_bid_product_items = Bid.objects.filter(product__slug = slug).order_by('-created_at')
+    product = Product.objects.filter(slug=slug).first()
+    context = {
+        'seller_bid_product_items' : seller_bid_product_items,
+        'product' : product
+    }
+    return render(request, 'store/seller/manage_product_bid.html', context)
+
+def confirm_bid_sell_prod(request):
+    if request.method == 'POST':
+        bid_id = request.POST.get('bid_id')
+        selected_bid = Bid.objects.filter(id=bid_id).first()
+        bidder = selected_bid.bidder
+        product = selected_bid.product
+        bidder_account = Account.objects.filter(user=bidder).first()
+
+        newOrder = Order()
+        newOrder.user = bidder
+        newOrder.first_name = bidder_account.first_name
+        newOrder.last_name = bidder_account.last_name
+        newOrder.phone = bidder_account.phone
+        newOrder.address = bidder_account.address
+        newOrder.city = bidder_account.city
+        newOrder.state = bidder_account.state
+        newOrder.country = bidder_account.country
+        newOrder.zip_code = bidder_account.zip_code
+
+        bid_quantity = selected_bid.quantity
+        selected_product_price = selected_bid.bidding_price
+        bid_total_price = bid_quantity * selected_product_price
+
+        newOrder.total_price = bid_total_price
+
+        tracking_num = "Xh&y" + str(random.randint(1111111, 9999999))
+        while Order.objects.filter(tracking_number = tracking_num) is None:
+            tracking_num = "Xh&y" + str(random.randint(1111111, 9999999))
+        newOrder.tracking_number = tracking_num
+
+        newOrder.save() 
+        
+        bid_order_item = product
+        OrderItem.objects.create(
+            order = newOrder,
+            product = product,
+            price= selected_product_price,
+            quantity = bid_quantity
+        )
+        #Decrease prod quantity from stock
+        orderProduct = Product.objects.filter(id=product.id).first()
+        orderProduct.quantity = orderProduct.quantity - bid_quantity
+        orderProduct.save()
+
+        Bid.objects.filter(product=selected_bid.product).delete()
+
+        return JsonResponse({"status" : "Successfully Created Bid"})
+    else:
+        pass
 
 
 # def search1(request):

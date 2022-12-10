@@ -40,6 +40,7 @@ urlpatterns = [
     path('checkout', checkout.checkoutitem, name="checkout"),
     path('place-order', checkout.placeorder, name="placeorder"),
 
+    path('place-bid', cart.placebid, name="placeBid"),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

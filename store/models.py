@@ -112,6 +112,7 @@ class Bid(models.Model):
     )
     bid_status = models.CharField(max_length=150, choices=orderStatuses, default='Pending')
     quantity = models.IntegerField(null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Report(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

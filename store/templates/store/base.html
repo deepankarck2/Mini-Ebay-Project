@@ -21,6 +21,8 @@
         <link rel="stylesheet" href="{% static 'store/checkOut_styles.css' %}">
         <link rel="stylesheet" href="{% static 'store/search_styles.css' %}">
         <link rel="stylesheet" href="{% static 'store/review_modal.css' %}">
+        <link rel="stylesheet" href="{% static 'store/buyer_account_styles.css' %}">
+        <link rel="stylesheet" href="{% static 'store/seller_account.css' %}">
         
         {% comment "Alertify JS" %}{% endcomment %}        
         <!-- CSS -->
@@ -41,7 +43,7 @@
 
                     <!-- For Conditional LOGIN View -->
                     {% if user.is_authenticated %}
-                    <li><a href=" {% url 'account' %}" class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">Account</a></li>
+                    <li><a href=" {% url 'buyer_account' %}" class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">Account</a></li>
                     <li><a href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a></li>
                     {% else %}
                     <li><a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
