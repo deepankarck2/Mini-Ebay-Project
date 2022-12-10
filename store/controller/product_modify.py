@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    fields = ['category', 'name', 'slug', 'product_image', 'small_description', 'description', 'quantity', 'original_price', 'bidding_price', 'status', 'meta_title', 'meta_keywords']
+    fields = ['category', 'name', 'slug', 'product_image', 'small_description', 'description', 'quantity', 'original_price', 'bid_starting_price', 'status', 'meta_title', 'meta_keywords']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -15,7 +15,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
 class ProductUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Product
-    fields = ['category', 'name', 'slug', 'product_image', 'small_description', 'description', 'quantity', 'original_price', 'bidding_price', 'status', 'meta_title', 'meta_keywords']
+    fields = ['category', 'name', 'slug', 'product_image', 'small_description', 'description', 'quantity', 'original_price', 'bid_starting_price', 'status', 'meta_title', 'meta_keywords']
     pk_url_kwarg = 'pk'
     query_pk_and_slug = True
     slug_field = 'slug'
