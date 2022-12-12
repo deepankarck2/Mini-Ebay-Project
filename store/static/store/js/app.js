@@ -194,5 +194,26 @@ $(document).ready(function(){
     })
   })
 
+  $('#depBtnSub').click(e => {
+    e.preventDefault();
+    const deposit_amount = $("#deposit_amount").val()
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+
+    $.ajax({
+      method : "POST",
+      url: "/confirm-deposit-money",
+      data: {
+        'deposit_amount' : deposit_amount,
+         csrfmiddlewaretoken : token
+      },
+      success: (response) =>{
+        alertify.success(response.status);
+        setInterval(()=>{
+          location.reload(true);
+        }, 200);
+      }
+    })
+  })
+
 });
 

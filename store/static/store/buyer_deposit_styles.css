@@ -1,0 +1,128 @@
+.deposit_mainscreen
+{
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+    flex-direction: column;
+    background-color: var(--main-body-color);
+    color:#963E7B;
+}
+
+.deposit_card {
+	width: 100%;
+    margin: auto;
+    background: white;
+    align-self: center;
+    top: 50rem;
+    border-radius: 1.5rem;
+    box-shadow: 4px 3px 20px #3535358c;
+    display:flex;
+    flex-direction: row;
+    
+}
+
+.deposit_leftside {
+	background: #030303;
+	width: 25rem;
+	display: inline-flex;
+    align-items: center;
+    justify-content: center;
+	border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+.product {
+    object-fit: cover;
+	width: 20em;
+    height: 20em;
+    border-radius: 100%;
+}
+
+.deposit_rightside {
+    background-color: #ffffff;
+	width: 35rem;
+	border-bottom-right-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    padding: 1rem 2rem 3rem 3rem;
+}
+
+.dep_p{
+    display:block;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: .8rem 0;
+}
+
+.dep_inputbox
+{
+    color:#030303;
+	width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1.5px solid #ccc;
+    margin-bottom: 1rem;
+    border-radius: 0.3rem;
+    font-family: 'Roboto', sans-serif;
+    color: #615a5a;
+    font-size: 1.1rem;
+    font-weight: 500;
+  outline:none;
+}
+
+.deposit_expcvvS {
+    display:flex;
+    justify-content: space-between;
+    padding-top: 0.6rem;
+}
+
+.expcvv_text{
+    padding-right: 1rem;
+}
+.expcvv_text2{
+    padding:0 1rem;
+}
+
+.dep_button{
+    background: linear-gradient(
+135deg
+, #753370 0%, #298096 100%);
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    width:100%;
+    letter-spacing: .11rem;
+    outline:none;
+}
+
+.dep_button:hover
+{
+	transform: scale(1.05) translateY(-3px);
+    box-shadow: 3px 3px 6px #38373785;
+}
+
+@media only screen and (max-width: 1000px) {
+    .deposit_card{
+        flex-direction: column;
+        width: auto;
+      
+    }
+
+    .deposit_leftside{
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+      border-top-right-radius:0;
+      border-radius:0;
+    }
+
+    .deposit_rightside{
+        width:auto;
+        border-bottom-left-radius: 1.5rem;
+        padding:0.5rem 3rem 3rem 2rem;
+      border-radius:0;
+    }
+}
