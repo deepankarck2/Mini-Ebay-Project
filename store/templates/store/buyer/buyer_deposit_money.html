@@ -1,0 +1,74 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="section-p1">
+        <div class="buyer_account_page">
+            <div class="buyer_profile">
+                <div class="buyer_profile_detail">
+                    <img src="{{ user.account.image.url }}"> 
+                    <h2> {{ user.username }}</h2>
+                    <p> {{ user.email }} </p>
+                </div>
+                <br>
+                <ul class="buyer_account_options">
+                    <li><a href="{% url 'buyer_account' %}"> Account <span> > </span></a></li>
+                    <li><a href="#" class=""> Change Password <span> > </span></a></li>
+                    <li class="profile_active"><a href="{% url 'buyer_deposit_money' %}" class=""> Deposit Money <span> > </span></a></li>
+                    <li><a href="{% url 'buyer_purchase_history' %}" class=""> Purchase History <span> > </span></a></li>
+                    <li><a href="{% url 'buyer_bidding_history' %}" class=""> Bidding History <span> > </span></a></li>
+                </ul>
+            </div>
+
+            <div class="buyer_account_detail">
+                <div class="deposit_mainscreen">
+                    {% if user.account.account_balance  %}
+                        <p class="dep_p" style="font-size:20px;"><strong> Current Balance: ${{ user.account.account_balance }}</strong></p>
+                    {%else%}
+                    <p class="dep_p" style="font-size:20px;"><strong> Current Balance: Not available. Deposit now.</strong></p>
+                    {% endif %}
+                    <!-- <img src="https://image.freepik.com/free-vector/purple-background-with-neon-frame_52683-34124.jpg"  class="bgimg " alt="">--> 
+                    <div class="deposit_card">
+                        <div class="deposit_leftside">
+                        <img
+                            src="https://i.pinimg.com/originals/18/9d/dc/189ddc1221d9c1c779dda4ad37a35fa1.png"
+                            class="product"
+                            alt="Shoes"
+                        />
+                        </div>
+                        <div class="deposit_rightside">
+                        <form>
+                            {% csrf_token %}
+                            <h1>Deposit Money</h1>
+                            <p>Cardholder Name</p>
+                            <input type="text" class="dep_inputbox" name="name" required />
+                            <p>Card Number</p>
+                            <input type="number" class="dep_inputbox" name="card_number" id="card_number" required />
+                
+                            <p class="dep_p">Card Type</p>
+                            <select class="dep_inputbox" name="card_type" id="card_type" required>
+                            <option value="">--Select a Card Type--</option>
+                            <option value="Visa">Visa</option>
+                            <option value="MasterCard">MasterCard</option>
+                            </select>
+                <div class="deposit_expcvv">
+                
+                            <p class="expcvv_text">Expiry</p>
+                            <input type="date" class="dep_inputbox" name="exp_date" id="exp_date" required />
+                
+                            <p class="expcvv_text2">CVV</p>
+                            <input type="password" class="dep_inputbox" name="cvv" id="cvv" required />
+
+                            <p class="expcvv_text2">Enter Deposit Amount</p>
+                            <input type="text" class="dep_inputbox" name="deposit_amount" id="deposit_amount" required placeholder="$"/>
+                        </div>
+                            <p class="dep_p"></p>
+                            <button id="depBtnSub" type="submit" class="dep_button">Deposit Now</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div>
+    </div>
+{% endblock content%}
