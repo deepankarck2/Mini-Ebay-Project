@@ -14,13 +14,43 @@
                 <ul class="buyer_account_options">
                     <li><a href="{% url 'buyer_account' %}"> Account <span> > </span></a></li>
                     <li><a href="#" class=""> Change Password <span> > </span></a></li>
+                    <li><a href="{% url 'buyer_deposit_money' %}" class=""> Deposit Money <span> > </span></a></li>
                     <li class="profile_active"><a href="{% url 'buyer_purchase_history' %}" class=""> Purchase History <span> > </span></a></li>
                     <li><a href="{% url 'buyer_bidding_history' %}" class=""> Bidding History <span> > </span></a></li>
                 </ul>
             </div>
             <div class="buyer_account_detail">
                 <div id="get_profile_info">
-
+                    {% if purchased_items %}
+                        
+                        <table class="styled-table"> 
+                            <thead>
+                                <tr>
+                                    <th>Image </th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Purchase Date</th>
+                                    <th>Seller</th>
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                {% for item in purchased_items %}
+                                    <tr>
+                                        <th>
+                                            <img src = "{{ item.product.product_image.url }}" height="50px" width = "50px"> 
+                                        </th> 
+                                        <th>{{ item.product.name  }}</th>
+                                        <th>{{ item.price }}</th>
+                                        <th>{{ item.quantity  }}</th>
+                                        <th>{{ item.order.created_at  }}</th>
+                                        <th> <a href="{% url 'public-seller-profile' item.product.author.id %}">{{ item.product.author }} </a> </th> 
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table> 
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
         <div>
