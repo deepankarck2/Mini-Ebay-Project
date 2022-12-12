@@ -206,6 +206,25 @@ def buyer_bidding_history(request):
     }
     return render(request, 'store/buyer/buyer_bidding_history.html', context)
 
+def buyer_deposit_money(request):
+    return render(request, 'store/buyer/buyer_deposit_money.html')
+
+def confirm_deposit_money(request):
+    print(request)
+    if (request.method == "POST"):
+        user = request.user
+        deposit_amount = int(request.POST.get("deposit_amount"))
+        user_obj = Account.objects.filter(user=user).first()
+        user_current_banalce = user_obj.account_balance
+        if(not user_current_banalce):
+            user_current_banalce = 0
+        user_new_balance = user_current_banalce + deposit_amount
+        user_obj.account_balance = user_new_balance
+        user_obj.save()
+        return JsonResponse({"status" :"Deposit Successfully"})
+    else:
+        return JsonResponse({"status" :"Somethong went wrong"})
+
 # Seller's Account
 def seller_account(request):
     if(request.method == 'POST'):
@@ -289,6 +308,7 @@ def confirm_bid_sell_prod(request):
             price= selected_product_price,
             quantity = bid_quantity
         )
+
         #Decrease prod quantity from stock
         orderProduct = Product.objects.filter(id=product.id).first()
         orderProduct.quantity = orderProduct.quantity - bid_quantity
@@ -298,7 +318,7 @@ def confirm_bid_sell_prod(request):
 
         return JsonResponse({"status" : "Successfully Created Bid"})
     else:
-        pass
+        return redirect('seller_account')
 
 
 # def search1(request):
