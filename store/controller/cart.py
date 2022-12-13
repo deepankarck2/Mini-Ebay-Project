@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from store.models import Product, Cart, Bid
 from django.contrib.auth.decorators import login_required
-
+from users.models import Account
 def placebid(request):
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
@@ -24,30 +24,50 @@ def placebid(request):
                 elif(product_check.quantity >= product_quantity):
                     if(current_bid == None):
                         if(user_bid_amount >= starting_bid):
-                            product_check.bid_current_price = user_bid_amount
-                            product_check.save()
-                            Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
-                            return JsonResponse({'status': "Product bid successfully!", 'reload': 'true'})
+                            user_current_balance = request.user.account.account_balance
+                            if(not user_current_balance):
+                                user_current_balance = 0
+                            if(user_current_balance < user_bid_amount):
+                                return JsonResponse({'status': "Not Enough Money"})
+                            else:
+                                product_check.bid_current_price = user_bid_amount
+                                product_check.save()
+                                Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
+                                return JsonResponse({'status': "Product bid successfully!", 'reload': 'true'})
                         else:
                             return JsonResponse({'status': 'Please enter higher bid.'})
                     elif(user_bid_amount <= current_bid):
                         return JsonResponse({'status': 'Please enter higher bid.'})
                     elif(user_bid_amount > current_bid):
                         try:
-                            bid = Bid.objects.get(bidder__id = request.user.id, product__id = product_id)
-                            bid.bidder=request.user
-                            bid.bidding_price =user_bid_amount
-                            bid.product_id=product_id
-                            bid.quantity=product_quantity
-                            product_check.bid_current_price = user_bid_amount
-                            product_check.save()
-                            bid.save()
-                            return JsonResponse({'status': "Your bid has been updated!", 'reload': 'true'})
+                            user_current_balance = request.user.account.account_balance
+                            if(not user_current_balance):
+                                user_current_balance = 0
+                            if(user_current_balance < user_bid_amount):
+                                return JsonResponse({'status': "Not Enough Money"})
+                            else:
+                                bid = Bid.objects.get(bidder__id = request.user.id, product__id = product_id)
+                                bid.bidder=request.user
+                                bid.bidding_price =user_bid_amount
+                                bid.product_id=product_id
+                                bid.quantity=product_quantity
+                                product_check.bid_current_price = user_bid_amount
+                                product_check.save()
+                                bid.save()
+                            
+                                return JsonResponse({'status': "Your bid has been updated!", 'reload': 'true'})
                         except Bid.DoesNotExist:
-                            Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
-                            product_check.bid_current_price = user_bid_amount
-                            product_check.save()
-                            return JsonResponse({'status': "Product bid successfully!", 'reload': 'true'})
+                            user_current_balance = request.user.account.account_balance
+                            if(not user_current_balance):
+                                user_current_balance = 0
+                            if(user_current_balance < user_bid_amount):
+                                return JsonResponse({'status': "Not Enough Money"})
+                            else:
+                                Bid.objects.create(bidder=request.user, bidding_price =user_bid_amount, product_id=product_id, quantity=product_quantity)
+                                product_check.bid_current_price = user_bid_amount
+                                product_check.save()
+                                
+                                return JsonResponse({'status': "Product bid successfully!", 'reload': 'true'})
             else:
                 return JsonResponse({'status': "No such product found"})
         else:

@@ -1,0 +1,30 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+<div class="section-p1">
+    {% if all_reports %}
+    <h1>Reports</h1>
+        {% for report in all_reports %}
+        <h4>Report Subject: {{ report.subject  }} </h4>
+        <h4>Reported Product: {{ report.product }} </h4>
+        <h4>Product Owner: {{ report.user }} </h4>
+        <p><strong>Report Body:</strong> {{ report.body }} </p>
+        <hr>
+        <br>
+        {% endfor %}
+        <br>
+        <span class="">
+            {% if all_reports.has_previous %}
+                <a href="?page1={{ all_reports.previous_page_number }}"> previous </a>
+            {% endif %}
+            <span class="">
+                Page {{ all_reports.number }} of {{ all_reports.paginator.num_pages }}
+            </span>
+            {% if all_reports.has_next %}
+                <a href="?page1={{ all_reports.next_page_number }}"> See More </a>
+            {% endif %}
+        </span>
+    {% endif %}
+</div> 
+
+{% endblock content %}

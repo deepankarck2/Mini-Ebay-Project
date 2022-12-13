@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Category, Product, Cart, Report, Bid, Order, OrderItem
+from .models import Category, Product, Cart, Report, Bid, Order, OrderItem, Message
 from users.models import User
 from users.models import ReviewRating, Account
 from django.contrib import messages
@@ -16,7 +16,12 @@ from users.forms import UserRegisterForm, UserUpdateForm, AccountUpdateForm
 import random
 
 def home(request):
-    return render(request, 'store/home.html')
+    personalized_products = Product.objects.all().order_by('?')[:5]
+    print(personalized_products)
+    context = {
+        'personalized_products' : personalized_products
+    }
+    return render(request, 'store/home.html', context)
 
 def categories(request):
     category = Category.objects.filter(status=0)
@@ -70,8 +75,6 @@ def search(request):
         title = myDict['title[]'] if 'title[]' in myDict else None
         keyword = myDict['keyword[]'] if 'keyword[]' in myDict else None
 
-        print(title)
-        print(keyword)
         filter_prods = Product.objects.all()
 
         query = functools.reduce(operator.or_, (Q(name__contains = item) for item in title))
@@ -83,7 +86,7 @@ def search(request):
             query = functools.reduce(operator.or_, (Q(meta_keywords__contains = item) for item in keyword))
             filter_prods = filter_prods.filter(query)
         
-
+        
         context = {
             'products' : filter_prods
         }
@@ -120,11 +123,13 @@ def public_seller_profile(request, pk):
     rate_count = 0
     rate_total = 0
     ave_rate = "Not Enough info"
-    for review in all_review:
+    for review in Model_two:
         rate_count += 1
         rate_total += review.rating
     if(rate_count > 0 ):
         ave_rate = rate_total/rate_count
+    else:
+        ave_rate = "Not Enough review"
 
     context = {
         'model_one': Model_one, 
@@ -154,6 +159,7 @@ def submit_review(request, user_id):
                 data.review_receiver_id = user_id
                 data.review_giver_id = request.user.id
                 data.save()
+
                 messages.success(request, "Your review has been submitted!")
                 return redirect(url)
     return redirect(url)
@@ -358,7 +364,41 @@ def seller_listed_items(request):
         "products" : products
     }
     return render(request, 'store/seller/seller_listed_items.html', context)
-    
+
+@login_required
+def seller_messages(request):
+    all_messages = Message.objects.filter(user=request.user).order_by('created_at')
+    paginator = Paginator(all_messages, 3)
+
+    page = request.GET.get('page1')
+    try:
+        all_messages = paginator.page(page)
+    except PageNotAnInteger:
+        all_messages = paginator.page(1)
+    except EmptyPage:
+        all_messages = paginator.page(paginator.num_pages)
+        
+    context = {
+        'all_messages' : all_messages
+    }
+    return render(request, 'store/seller/seller_messages.html', context)
+
+@login_required
+def admin_view(request):
+    all_reports = Report.objects.all().order_by('created_at')
+    paginator = Paginator(all_reports, 3)
+
+    page = request.GET.get('page1')
+    try:
+        all_reports = paginator.page(page)
+    except PageNotAnInteger:
+        all_reports = paginator.page(1)
+    except EmptyPage:
+        all_reports = paginator.page(paginator.num_pages)
+    context = {
+        'all_reports' : all_reports
+    }
+    return render(request, "store/admin_view.html", context)
 # def search1(request):
 #     if request.GET:
 #         mydict = dict(request.GET)

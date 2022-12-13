@@ -23,6 +23,7 @@ class Account(models.Model):
     country = models.CharField(null=True,blank=True, max_length=80)
     zip_code = models.CharField(null=True,blank=True, max_length=50)
     created_at = models.DateField(auto_now_add=True)
+    average_rating = models.FloatField(default=0, blank=True)
     warnings = models.IntegerField(default=0)
 
     def __str__(self) -> str:

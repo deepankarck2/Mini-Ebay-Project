@@ -1,0 +1,52 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="section-p1">
+        <h2>Seller's Account</h2>
+        <div class="buyer_account_page">
+            <div class="buyer_profile">
+                <div class="buyer_profile_detail">
+                    <img src="{{ user.account.image.url }}"> 
+                    <h2> {{ user.username }}</h2>
+                    <p> {{ user.email }} </p>
+                </div>
+                <br>
+                <ul class="buyer_account_options">
+                    <li ><a href="{% url 'seller_account' %}"> Account <span> > </span></a></li>
+                    <li><a href="{% url 'seller_listed_items' %}" > My Listed Itmes<span> > </span></a></li>
+                    <li><a href="{% url 'manage_bids' %}" class=""> Manage Bids  <span> > </span></a></li>
+                    <li><a href="{% url 'seller_sold_items' %}" class=""> Sold Itmes History  <span> > </span></a></li>
+                    <li class="profile_active"><a href="{% url 'seller_messages' %}" class=""> Seller Messages  <span> > </span></a></li>
+                </ul>
+            </div>
+            <div class="buyer_account_detail">
+                <div id="get_profile_info">
+                    {% if all_messages %}
+                    <h1>Reports</h1>
+                        {% for message in all_messages %}
+                        <h4>Message Subject: {{ message.subject  }} </h4>
+                        <p><strong>Message Body:</strong> {{ message.body }} </p>
+                        <p>Sent at: {{ message.created_at }}</p>
+                        <hr>
+                        <br>
+                        {% endfor %}
+                        <br>
+                        <span class="">
+                            {% if all_messages.has_previous %}
+                                <a href="?page1={{ all_messages.previous_page_number }}"> previous </a>
+                            {% endif %}
+                            <span class="">
+                                Page {{ all_messages.number }} of {{ all_messages.paginator.num_pages }}
+                            </span>
+                            {% if all_messages.has_next %}
+                                <a href="?page1={{ all_messages.next_page_number }}"> See More </a>
+                            {% endif %}
+                        </span>
+                    {% else %}
+                        <h1>No Messages </h1>
+                    {% endif %}
+                </div>
+            </div>
+        <div>
+    </div>
+{% endblock content%}

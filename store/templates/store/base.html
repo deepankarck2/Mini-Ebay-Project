@@ -34,7 +34,10 @@
     </head>
     <body>
         <section id="header">
-            <a href="{% url 'store-home' %}"><img src="{% static 'store/media/logo.png' %}" class="logo"></a>
+            <div>
+                <a href="{% url 'store-home' %}"><img src="{% static 'store/media/logo.png' %}" class="logo"></a>
+                <a href="{% url 'search' %}" style="text-decoration: none" ><i class="fas fa-search"></i> Search</a>
+            </div>
             <div>
                 <ul id="navbar">
                     <li> Hello {{ user.username }} </li>

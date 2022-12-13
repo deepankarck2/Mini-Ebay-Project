@@ -13,7 +13,7 @@
                 <br>
                 <ul class="buyer_account_options">
                     <li><a href="{% url 'buyer_account' %}"> Account <span> > </span></a></li>
-                    <li><a href="#" class=""> Change Password <span> > </span></a></li>
+                    <li><a href="{% url 'password_reset' %}" class=""> Change Password <span> > </span></a></li>
                     <li><a href="{% url 'buyer_deposit_money' %}" class=""> Deposit Money <span> > </span></a></li>
                     <li><a href="{% url 'buyer_purchase_history' %}" class=""> Purchase History <span> > </span></a></li>
                     <li  class="profile_active"><a href="{% url 'buyer_bidding_history' %}" class=""> Bidding History <span> > </span></a></li>

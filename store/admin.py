@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Cart, Order, OrderItem, Bid, Report
+from .models import Category, Product, Cart, Order, OrderItem, Bid, Report, Message
 
 # Register your models here.
 admin.site.register(Category)
@@ -14,3 +14,4 @@ class BidAdmin(admin.ModelAdmin):
 admin.site.register(Bid, BidAdmin)
 
 admin.site.register(Report)
+admin.site.register(Message)

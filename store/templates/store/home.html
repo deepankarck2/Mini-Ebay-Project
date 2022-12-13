@@ -1,22 +1,47 @@
 {% extends "store/base.html" %}
 {% load static %}
 {% block content %}
-<div class=> </div>
-<section class="slid_container">
-	<div class="slider-wrapper">
-		<div class="slider">
-            <img id="slide-1" src="https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="3D rendering of an imaginary green planet in space" />
-			
-			<img id="slide-2" src="https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="3D rendering of an imaginary orange planet in space" />
-			<img id="slide-3" src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="3D rendering of an imaginary blue planet in space" />
-		</div>
-		<div class="slider-nav">
-			<a href="#slide-1"></a>
-			<a href="#slide-2"></a>
-			<a href="#slide-3"></a>
-		</div>
-	</div>
-</section>
+
+{% if user.is_authenticated %}
+    {% if personalized_products %}
+    <h1 class="section-p1"> Some Products You may Like: </h1>
+    <div class="cards">
+    {% for item in personalized_products %}
+        <div class="card"> 
+            <a href="{% url 'productview' item.category.slug item.slug %}" class="cat_link">
+                <div>
+                    <img class="image" src="{{ item.product_image.url }}" alt="product-image">
+                </div>
+                <div>
+                    <h4>{{ item.name }}</h4>
+                </div>
+                <div>
+                    <span>Original:$ {{item.original_price}}<span>
+                    <span>Bidding:$ {{item.bidding_price}}<span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+{% else %}
+    <section class="slid_container">
+        <div class="slider-wrapper">
+            <div class="slider">
+                <img id="slide-1" src="https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="3D rendering of an imaginary green planet in space" />
+                
+                <img id="slide-2" src="https://images.unsplash.com/photo-1612423284934-2850a4ea6b0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="3D rendering of an imaginary orange planet in space" />
+                <img id="slide-3" src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="3D rendering of an imaginary blue planet in space" />
+            </div>
+            <div class="slider-nav">
+                <a href="#slide-1"></a>
+                <a href="#slide-2"></a>
+                <a href="#slide-3"></a>
+            </div>
+        </div>
+    </section>
+{% endif %}
 
 <div class="section-p1"><h2>Our Service</h2></div>
 <section id="feature" class="section-p1">

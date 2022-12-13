@@ -119,3 +119,10 @@ class Report(models.Model):
     user = models.ForeignKey(User, verbose_name="Product Owner", on_delete=models.CASCADE)
     subject = models.CharField(max_length=150, help_text="Suject of the report", blank=False)
     body = models.TextField(max_length=500, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now=True)
+
+class Message(models.Model):
+    user = models.ForeignKey(User, verbose_name="Seller", on_delete=models.CASCADE)
+    subject = models.CharField(max_length=150, help_text="Suject of the report", blank=False)
+    body = models.TextField(max_length=500, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now=True)

@@ -93,7 +93,7 @@
     </div>
     
     <h2>Seller Reviews:</h2>
-    <h3>Average Rating: {{ average_rate }}</h3>
+    <h3>Average Rating: {{ average_rate|floatformat:2 }}</h3>
     <hr>
     {% if model_two %}
     <div class="col-md-12 well">

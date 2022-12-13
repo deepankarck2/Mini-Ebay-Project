@@ -34,7 +34,10 @@ urlpatterns = [
     path('seller-account/', views.seller_account, name="seller_account"),
     path('seller_sold_items/', views.seller_sold_items, name="seller_sold_items"),
     path('seller_listed_items/', views.seller_listed_items, name="seller_listed_items"),
+    path('seller_messages/', views.seller_messages, name="seller_messages"),
     path('manage-bids/', views.manage_bids, name="manage_bids"),
     path('manage-product-bid/<str:slug>/', views.manage_product_bid, name="manage_product_bid"),
     path('confirm-bid-sell-prod', views.confirm_bid_sell_prod, name="confirm_bid_sell_prod"),
+
+    path('admin-view/', views.admin_view, name="admin_view"),
 ]
