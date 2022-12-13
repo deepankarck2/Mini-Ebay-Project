@@ -36,7 +36,10 @@ def placeorder(request):
         for item in cart:
             cart_total_price = cart_total_price + item.product.original_price * item.product_quantity
         user = request.user
-        if(user.account.account_balance < cart_total_price):
+        user_current_balance = user.account.account_balance
+        if(not user_current_balance):
+            user_current_balance = 0
+        if(user_current_balance < cart_total_price):
             messages.success(request, "Not Enough Money")
         else:
             newOrder = Order()
@@ -58,7 +61,7 @@ def placeorder(request):
             newOrder.tracking_number = tracking_num
             buyer_user_account = Account.objects.filter(user = user).first()
 
-            buyer_user_account.account_balance = buyer_user_account.account_balance - cart_total_price
+            buyer_user_account.account_balance = user_current_balance - cart_total_price
             buyer_user_account.save()
             newOrder.save() 
 
