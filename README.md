@@ -15,7 +15,7 @@
 
 - [X] 1.Process applications and decide who can be OU and who should be denied with justifications.
 - [X] 2.Process items the OUs submitted intending to sell, some can be publicly available on the system and some may be deniedand communicated to the OU.
-- [ ] 3.Send warnings to OUs who received two complaints or the average grade is lower than 2 with at least 3 evaluators, should an OU receive two warnings this OU should be removed from the system automatically.
+- [X] 3.Send warnings to OUs who received two complaints or the average grade is lower than 2 with at least 3 evaluators, should an OU receive two warnings this OU should be removed from the system automatically.
   - [X] The SU has the power to remove any OU(s) with justifications at any time.
 - [ ] 4.Collect transaction statistics for a certain period (a day or a week) and/or a certain OU(s). 
 - [ ] 5.Settle disputes between sellers and buyers and apply warnings/removals accordingly.
@@ -30,7 +30,7 @@
 - [X] 7.Grade an OU after buying an item from him/her, 1 being the worst and 5 being the best. 
   - [ ] 7.1 Any OU making 3 1 (worst) or 5(best) rating to others, the OU must see the SU to make sure there is no problem, a warning or removal could ensure based on SU’s judgment.
 - [X] 8.See his/her own transaction history.
-- [ ] 9.Change his/her password, name, address, phone,and credit card number.
+- [X] 9.Change his/her password, name, address, phone,and credit card number.
 
 
 ## A GU can do the following tasks:
@@ -41,7 +41,7 @@
 ## Other system constraints:
 
 - [X] 1.OUs removed from the system by SUs will be blocked for future re-application.
-- [ ] 2.Items removed from the systemby SUs will be blacklisted fromsystem.
+- [X] 2.Items removed from the systemby SUs will be blacklisted from system.
 - [ ] 3.The system can distinguish the interest of an OU during the login session and show different GUI according to the users’ browsing or selling/buying history. No adaptive GUI for GUs or SUs.
 - [X] 4.GUI is required, could be a local application or web-based one, no preference
 - [ ] 5.A creative feature with 10% of the project determined by each team, considerably creative ones (positive outliers) could obtain special bonus.
