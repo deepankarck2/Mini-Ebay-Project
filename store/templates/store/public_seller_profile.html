@@ -5,10 +5,29 @@
     <hr>
     {% if model_one %}
         <div class="">
-            {% for item in model_one %}
-                {{ item }}
+                <table class="styled-table"> 
+                    <thead>
+                        <tr>
+                            <th>Image </th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {% for item in model_one %}
+                            <tr>
+                                <th>
+                                    <img src = "{{ item.product_image.url }}" height="70px" width = "70px"> 
+                                </th> 
+                                <th>{{ item.name  }}</th>
+                                <th>{{ item.original_price }}</th>
+                                <th>{{ item.small_description  }}</th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table> 
                 <br>
-            {% endfor %}
 
             <span class="">
                 {% if model_one.has_previous %}
@@ -18,7 +37,7 @@
                     Page {{ model_one.number }} of {{ model_one.paginator.num_pages }}
                 </span>
                 {% if model_one.has_next %}
-                    <a href="?page1={{ model_one.next_page_number }}"> next </a>
+                    <a href="?page1={{ model_one.next_page_number }}"> See More </a>
                 {% endif %}
             </span>
         </div>
@@ -28,7 +47,7 @@
         <br> 
     
     <div>
-        <button><a href="#demo-modal">Rate and Review Seller</a></button>
+        <button class="button-54" ><a href="#demo-modal">Rate and Review Seller</a></button>
     
         <div id="demo-modal" class="modal">
             <div class="modal__content">
@@ -73,15 +92,25 @@
         </div>
     </div>
     
-    <h2>Seller Review:</h2>
+    <h2>Seller Reviews:</h2>
+    <h3>Average Rating: {{ average_rate }}</h3>
     <hr>
     {% if model_two %}
     <div class="col-md-12 well">
         {% for review in model_two %}
-            <h3>{{ review.subject }}</h3>
-            <h4>Rating: {{ review.rating }}/5 </h4>
-            <p> {{ review.review }}</p>
-            <br>
+            <div class="seller_rate_detail">
+                <div class="seller_rate_detail_left"> 
+                    <img src="{{ review.review_giver.account.image.url }}" height="90px" width="90px" style="border-radius:50%;"> </img>
+                </div>
+                
+                <div class="seller_rate_detail_right"> 
+                    {% comment "Style is in Seller account file" %}{% endcomment %}
+                    <h3>{{ review.subject }}</h3>
+                    <h4>Rating: {{ review.rating }}/5.0 </h4>
+                    <p> {{ review.review }}</p>   
+                </div>
+            </div>
+            <br> 
         {% endfor %}
         <span class="step-links pagination">
             {% if model_two.has_previous %}

@@ -22,7 +22,6 @@
             <div class="buyer_account_detail">
                 <div id="get_profile_info">
                     {% if purchased_items %}
-                        
                         <table class="styled-table"> 
                             <thead>
                                 <tr>
@@ -31,6 +30,7 @@
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Purchase Date</th>
+                                    <th>Tracking Number</th>
                                     <th>Seller</th>
                                 </tr>
                             </thead>
@@ -44,6 +44,7 @@
                                         <th>{{ item.price }}</th>
                                         <th>{{ item.quantity  }}</th>
                                         <th>{{ item.order.created_at  }}</th>
+                                        <th>{{ item.order.tracking_number  }}</th>
                                         <th> <a href="{% url 'public-seller-profile' item.product.author.id %}">{{ item.product.author }} </a> </th> 
                                     </tr>
                                 {% endfor %}

@@ -1,0 +1,58 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="section-p1">
+        <h2>Seller's Account</h2>
+        <div class="buyer_account_page">
+            <div class="buyer_profile">
+                <div class="buyer_profile_detail">
+                    <img src="{{ user.account.image.url }}"> 
+                    <h2> {{ user.username }}</h2>
+                    <p> {{ user.email }} </p>
+                </div>
+                <br>
+                <ul class="buyer_account_options">
+                    <li ><a href="{% url 'seller_account' %}"> Account <span> > </span></a></li>
+                    <li><a href="" class=""> My Listed Itmes<span> > </span></a></li>
+                    <li><a href="{% url 'manage_bids' %}" class=""> Manage Bids  <span> > </span></a></li>
+                    <li><a href="{% url 'seller_sold_items' %}" class=""> Sold Itmes History  <span> > </span></a></li>
+                </ul>
+            </div>
+            <div class="buyer_account_detail">
+                <div id="get_profile_info">
+                    {% if sold_items %}
+                    <table class="styled-table"> 
+                        <thead>
+                            <tr>
+                                <th>Image </th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Sold Date</th>
+                                <th>Buyer</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            {% for item in sold_items %}
+                                <tr>
+                                    <th>
+                                        <img src = "{{ item.product.product_image.url }}" height="50px" width = "50px"> 
+                                    </th> 
+                                    <th>{{ item.product.name  }}</th>
+                                    <th>{{ item.price }}</th>
+                                    <th>{{ item.quantity  }}</th>
+                                    <th>{{ item.order.created_at  }}</th>
+                                    <th>{{ item.order.user }} </a> </th> 
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table> 
+                {% else %}
+                    <h1>You haven't sold any products.</h1>
+                {% endif %}
+                </div>
+            </div>
+        <div>
+    </div>
+{% endblock content%}

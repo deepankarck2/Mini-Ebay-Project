@@ -27,9 +27,13 @@ urlpatterns = [
     path('buyer-account/', views.buyer_account, name="buyer_account"),
     path('buyer-account/purchase-history/', views.buyer_purchase_history, name="buyer_purchase_history"),
     path('buyer-account/bidding-history/', views.buyer_bidding_history, name="buyer_bidding_history"),
+    path('buyer-account/deposit_money/', views.buyer_deposit_money, name="buyer_deposit_money"),
+    path('confirm-deposit-money', views.confirm_deposit_money, name="confirm_deposit_money"),
 
     # Seller's Account Views
     path('seller-account/', views.seller_account, name="seller_account"),
+    path('seller_sold_items/', views.seller_sold_items, name="seller_sold_items"),
+    path('seller_listed_items/', views.seller_listed_items, name="seller_listed_items"),
     path('manage-bids/', views.manage_bids, name="manage_bids"),
     path('manage-product-bid/<str:slug>/', views.manage_product_bid, name="manage_product_bid"),
     path('confirm-bid-sell-prod', views.confirm_bid_sell_prod, name="confirm_bid_sell_prod"),

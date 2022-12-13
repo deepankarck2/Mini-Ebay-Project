@@ -117,10 +117,20 @@ def public_seller_profile(request, pk):
         Model_two = paginator.page(paginator.num_pages)
 
     seller = Account.objects.filter(user__id=pk).first()
+    rate_count = 0
+    rate_total = 0
+    ave_rate = "Not Enough info"
+    for review in all_review:
+        rate_count += 1
+        rate_total += review.rating
+    if(rate_count > 0 ):
+        ave_rate = rate_total/rate_count
+
     context = {
         'model_one': Model_one, 
         'model_two': Model_two,
         'seller' : seller,
+        'average_rate' : ave_rate
         }
 
     return render(request, 'store/public_seller_profile.html', context)
@@ -195,7 +205,13 @@ def buyer_account(request):
     return render(request, 'store/buyer/buyer_account.html', context)
 
 def buyer_purchase_history(request):
-    return render(request, 'store/buyer/buyer_purchase_history.html')
+    user = request.user
+    orders = Order.objects.filter(user=user)
+    order_items = OrderItem.objects.filter(order__user=user)
+    context = {
+        "purchased_items" : order_items
+    }
+    return render(request, 'store/buyer/buyer_purchase_history.html', context)
 
 def buyer_bidding_history(request):
     curr_user = request.user
@@ -226,6 +242,7 @@ def confirm_deposit_money(request):
         return JsonResponse({"status" :"Somethong went wrong"})
 
 # Seller's Account
+@login_required
 def seller_account(request):
     if(request.method == 'POST'):
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -249,6 +266,17 @@ def seller_account(request):
     }
     return render(request, 'store/seller/seller_account.html', context)
 
+@login_required
+def seller_sold_items(request):
+    user = request.user
+    sold_items = OrderItem.objects.filter(product__author=user)
+    print(sold_items)
+    context = {
+        "sold_items" : sold_items
+    }
+    return render(request, 'store/seller/seller_sold_items.html', context)
+
+@login_required
 def manage_bids(request):
     seller_bid_products = Bid.objects.filter(product__author__id = request.user.id)
     seller_bid_products = Bid.objects.values('product').distinct()
@@ -260,6 +288,7 @@ def manage_bids(request):
     }
     return render(request, 'store/seller/manage_bids.html', context)
 
+@login_required
 def manage_product_bid(request, slug):
     seller_bid_product_items = Bid.objects.filter(product__slug = slug).order_by('-created_at')
     product = Product.objects.filter(slug=slug).first()
@@ -269,6 +298,7 @@ def manage_product_bid(request, slug):
     }
     return render(request, 'store/seller/manage_product_bid.html', context)
 
+@login_required
 def confirm_bid_sell_prod(request):
     if request.method == 'POST':
         bid_id = request.POST.get('bid_id')
@@ -320,7 +350,10 @@ def confirm_bid_sell_prod(request):
     else:
         return redirect('seller_account')
 
-
+@login_required
+def seller_listed_items(request):
+    
+    return render(request, 'store/seller/seller_listed_items.html')
 # def search1(request):
 #     if request.GET:
 #         mydict = dict(request.GET)

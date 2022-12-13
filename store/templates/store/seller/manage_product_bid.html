@@ -16,8 +16,8 @@
                     <li><a href="{% url 'seller_account' %}"> Account <span> > </span></a></li>
                     <li><a href="" class=""> My Listed Itmes<span> > </span></a></li>
                     <li class="profile_active"><a href="{% url 'manage_bids' %}" class=""> Manage Bids  <span> > </span></a></li>
-                    <li><a href="" class=""> Transaction History  <span> > </span></a></li>
-
+                    <li><a href="{% url 'seller_sold_items' %}" class="">
+                    <li><a href="{% url 'seller_sold_items' %}" class=""> Sold Itmes History  <span> > </span></a></li>
                 </ul>
             </div>
             <div class="buyer_account_detail">
@@ -37,7 +37,7 @@
                     </div> 
                     {% endfor %}
                 {% else %}
-                    <p>Something wrong!. Please go back to manage bid page. </p>
+                    <p>No Available bids for this product! Or No bids has been placed for this product.</p>
                 {% endif %}
             </div>
     </div>
