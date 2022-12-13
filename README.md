@@ -29,7 +29,7 @@
 - [X] 6.File complaints to SUs against certain OUs whose item s/he purchased has some problem.
 - [X] 7.Grade an OU after buying an item from him/her, 1 being the worst and 5 being the best. 
   - [ ] 7.1 Any OU making 3 1 (worst) or 5(best) rating to others, the OU must see the SU to make sure there is no problem, a warning or removal could ensure based on SU’s judgment.
-- [ ] 8.See his/her own transaction history.
+- [X] 8.See his/her own transaction history.
 - [ ] 9.Change his/her password, name, address, phone,and credit card number.
 
 
@@ -40,8 +40,8 @@
 
 ## Other system constraints:
 
-- [ ] 1.OUs removed from the system by SUs will be blocked for future re-application.
+- [X] 1.OUs removed from the system by SUs will be blocked for future re-application.
 - [ ] 2.Items removed from the systemby SUs will be blacklisted fromsystem.
 - [ ] 3.The system can distinguish the interest of an OU during the login session and show different GUI according to the users’ browsing or selling/buying history. No adaptive GUI for GUs or SUs.
-- [ ] 4.GUI is required, could be a local application or web-based one, no preference
+- [X] 4.GUI is required, could be a local application or web-based one, no preference
 - [ ] 5.A creative feature with 10% of the project determined by each team, considerably creative ones (positive outliers) could obtain special bonus.
