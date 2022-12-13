@@ -39,6 +39,7 @@
                     <button class= "but increaseValue"> + </button>
                 </div>
             </div>
+            
             {% if products.quantity > 0 %}
                 {# Cart Section #}
                 <div class="cart_button">
@@ -47,7 +48,7 @@
 
                 {# Bid Section #}
                 {% if products.bid_status == 0 %}
-                    <div class="bid_section">
+                    <div class="bid_section" style="margin-top: 30px;">
                         <p class="bid_price"> Bid Starting Price: <strong> $ {{ products.bid_starting_price }} </strong></p> 
                         <p>Current Bid: <strong> $ {{ products.bid_current_price }} </strong> </p>
                         <div>
@@ -60,14 +61,9 @@
             {% else %}
                 <p class="not_avail">Item is Not available now!</p>
             {% endif %}
-                
-                {% if user == products.author%}
-                <button class="add_cart" id=""> <a href= "{% url 'product-delete' products.id %}"> Delete <i class=""> </a></button>
-                {% endif %}
-                <p> {{ products.id }} </p> 
 
-                <div class="report_prod">
-                    <button class="rep_prod_btn"><a href="#demo-modal"><i class="fa-solid fa-flag"></i> Report Product</a></button>
+                <div class="report_prod" style="margin-top:30px;">
+                    <button class="rep_prod_btn" style="background-color:#FFCCCB;"><a href="#demo-modal"><i class="fa-solid fa-flag"></i> Report Product</a></button>
     
                     <div id="demo-modal" class="modal">
                         <div class="modal__content">
@@ -83,7 +79,7 @@
                                     <textarea name="body" class="review_review" rows="4" maxlength=""></textarea>
                                     <br>
                                     <br>
-                                    <input type="submit" class="review_submit" value="Submit Review">
+                                    <input type="submit" class="review_submit" value="Submit Report">
                                 </div>
                             </form>
                             <a href="#" class="modal__close">&times;</a>
