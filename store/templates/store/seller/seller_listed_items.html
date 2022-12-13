@@ -1,0 +1,62 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="section-p1">
+        <h2>Seller's Account</h2>
+        <div class="buyer_account_page">
+            <div class="buyer_profile">
+                <div class="buyer_profile_detail">
+                    <img src="{{ user.account.image.url }}"> 
+                    <h2> {{ user.username }}</h2>
+                    <p> {{ user.email }} </p>
+                </div>
+                <br>
+                <ul class="buyer_account_options">
+                    <li><a href="{% url 'seller_account' %}"> Account <span> > </span></a></li>
+                    <li><a href="{% url 'seller_listed_items' %}"  class="profile_active"> My Listed Itmes<span> > </span></a></li>
+                    <li><a href="{% url 'manage_bids' %}" class=""> Manage Bids  <span> > </span></a></li>
+                    <li><a href="{% url 'seller_sold_items' %}" class=""> Sold Itmes History  <span> > </span></a></li>
+                </ul>
+            </div>
+            <div class="buyer_account_detail">
+                <div id="get_profile_info">
+                    {% if products %}
+                        
+                        <table class="styled-table"> 
+                            <thead>
+                                <tr>
+                                    <th>Image </th>
+                                    <th>Name</th>
+                                    <th>Original Price</th>
+                                    <th>Bidding Price</th>
+                                    <th>Current Bid Price</th>
+                                    <th>Edit Item info</th>
+                                    <th>Delete Product </th>
+
+                                </tr>
+                            </thead>
+                            <tbody> 
+                                
+                                {% for product in products %}
+                                    <tr>
+                                        <th>
+                                            <img src = "{{ product.product_image.url }}" height="50px" width = "50px"> 
+                                        </th> 
+                                        <th>{{ product.name  }}</th>
+                                        <th>{{ product.original_price }}</th>
+                                        <th>{{ product.bid_starting_price  }}</th>
+                                        <th>{{ product.bid_current_price  }}</th>
+                                        <th> <a href="{% url 'product-update' product.id %}"><button class="button-54">Edit Info</button></th></a>
+                                        <th> <a href="{% url 'product-delete' product.id %}"><button class="button-54" style="background-color:red;">Delete Product</button></th></a>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table> 
+                    {% else %}
+                        <h1> You haven't listed any items yet.</h1>
+                    {% endif %}
+                </div>
+            </div>
+        <div>
+    </div>
+{% endblock content%}

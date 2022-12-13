@@ -352,8 +352,13 @@ def confirm_bid_sell_prod(request):
 
 @login_required
 def seller_listed_items(request):
+    user = request.user
+    products = Product.objects.filter(author=user)
+    context = {
+        "products" : products
+    }
+    return render(request, 'store/seller/seller_listed_items.html', context)
     
-    return render(request, 'store/seller/seller_listed_items.html')
 # def search1(request):
 #     if request.GET:
 #         mydict = dict(request.GET)

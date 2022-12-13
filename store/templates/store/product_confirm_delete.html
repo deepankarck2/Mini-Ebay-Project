@@ -13,9 +13,11 @@
             <h2>Delete a Product! </h2>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <h3>Are you sure you want  to delete the post? " {{ object.title }}"</h3>
-                <button style="color: red;" type="submit"> Yes </button>
-                <button> <a href="{% url 'productview' object.category.slug object.slug %}"> Go back</a> </button>
+                <h3>Are you sure you want  to delete the product? {{ object.title }}"</h3>
+                <button style="color: red; height:50px; width:50px;" type="submit"> Yes </button>
+                <br>
+                <br>
+                <a href="{% url 'seller_listed_items' %}" style="color: green; height:50px; width:50px;"> <h2 style="color: green;" >Go back<h2></a> 
             </form>
             <div>
                 {{form.errors}}

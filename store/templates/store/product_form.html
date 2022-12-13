@@ -4,13 +4,13 @@
 
 {% block content %}
     <div class="section-p1"> 
-        {% if user.account.warnings >=   3 %}
+        {% if user.account.warnings >= 3 %}
         <div>
             <h1 style="color: red;">You have been banned!</h1> 
             <h3 style="color: red;">You can't add new Products!</h3>
         </div>
         {% else %}
-            <h2>Add a New Product! </h2>
+            <h2> Modify Or Add a New Product! </h2>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | crispy }}
@@ -22,10 +22,3 @@
         {% endif %}
     </div>
 {% endblock content %}
-
-{% comment "" %}
-        {{ form.name }}
-        {{ form.product_image.label }}
-
-        {{ form.product_image }}
-{% endcomment %}

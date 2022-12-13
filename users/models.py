@@ -15,6 +15,7 @@ class Account(models.Model):
     first_name = models.CharField(null=True,blank=True, max_length=150)
     last_name = models.CharField(null=True,blank=True, max_length=150)
     image = models.ImageField(default='profile_pics/default.jpg', upload_to= get_file_path)
+    account_balance = models.IntegerField(null=True, blank=True)
     phone = models.CharField(null=True,blank=True, max_length=50)
     address = models.CharField(null=True,blank=True, max_length=150)
     city = models.CharField(null=True,blank=True, max_length=80)
