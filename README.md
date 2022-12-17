@@ -17,18 +17,18 @@
 - [X] 2.Process items the OUs submitted intending to sell, some can be publicly available on the system and some may be deniedand communicated to the OU.
 - [X] 3.Send warnings to OUs who received two complaints or the average grade is lower than 2 with at least 3 evaluators, should an OU receive two warnings this OU should be removed from the system automatically.
   - [X] The SU has the power to remove any OU(s) with justifications at any time.
-- [ ] 4.Collect transaction statistics for a certain period (a day or a week) and/or a certain OU(s). 
-- [ ] 5.Settle disputes between sellers and buyers and apply warnings/removals accordingly.
+- [X] 4.Collect transaction statistics for a certain period (a day or a week) and/or a certain OU(s). 
+- [X] 5.Settle disputes between sellers and buyers and apply warnings/removals accordingly.
 
 ## An Ordinary users can do the following tasks:
 - [X] 1.Features enjoyed by a GU.
-- [ ] 2.Deposit or withdraw money (symbolically, no real money is involved in the system) from own account. After a transaction, the buyer’s money is transferred to the seller. A bidder cannot place a bid with amount more than s/he has in the system.
+- [X] 2.Deposit or withdraw money (symbolically, no real money is involved in the system) from own account. After a transaction, the buyer’s money is transferred to the seller. A bidder cannot place a bid with amount more than s/he has in the system.
 - [X] 3.Submit the bid to buy an available item, the OU who owns the item however decides if this transaction should proceed.
 - [X] 4.Submit the information (a picture or video, title, key words, time limit, price range) of the item(s) s/he wants to sell. 
 - [X] 5.Sell the item(s)s/he posted, the OUmay choose whom to sell, if not the highest bidder was chosen, a reason must be provided.
 - [X] 6.File complaints to SUs against certain OUs whose item s/he purchased has some problem.
 - [X] 7.Grade an OU after buying an item from him/her, 1 being the worst and 5 being the best. 
-  - [ ] 7.1 Any OU making 3 1 (worst) or 5(best) rating to others, the OU must see the SU to make sure there is no problem, a warning or removal could ensure based on SU’s judgment.
+  - [X] 7.1 Any OU making 3 1 (worst) or 5(best) rating to others, the OU must see the SU to make sure there is no problem, a warning or removal could ensure based on SU’s judgment.
 - [X] 8.See his/her own transaction history.
 - [X] 9.Change his/her password, name, address, phone,and credit card number.
 
