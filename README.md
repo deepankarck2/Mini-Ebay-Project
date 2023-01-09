@@ -1,3 +1,5 @@
+Fullstack ecommerce website built using HTML, CSS, JavaScript and Django with extensive functionalities. 
+
 # Documentation and Reports
 * [Phase-II Report](https://github.com/deepankarck2/Mini-Ebay-Project/files/10088725/X_chakraborty_phase_II.pdf)
 ## Demo Home Page:
