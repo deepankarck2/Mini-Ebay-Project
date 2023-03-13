@@ -8,6 +8,17 @@ Fullstack ecommerce website built using HTML, CSS, JavaScript and Django with ex
 
 
 # An Electronic Trading System aka (Mini-Ebay)
+# Technologies Used
+The Mini-Ebay project was built using a variety of technologies to create a full-stack application. The technologies used are:
+
+* HTML: Used to structure the content of the website and define its layout.
+* CSS: Used to style the website, giving it an attractive and consistent look and feel.
+* JavaScript: Used to add dynamic behavior to the website, such as form validation and interactive elements.
+* AJAX: Used to make asynchronous requests to the server, enabling the website to load data without requiring a page refresh.
+* API: Used to enable communication between the front-end and back-end of the application.
+* Django: Used as the back-end framework to handle the server-side logic and database management.
+* MySQL: Used as the database management system to store and retrieve data.
+
 #### We want to develop electronic trading such that every responsible user can trade their items. There are three types of users to this system: 
 1. Superusers (SUs), 
 2. Ordinary users (OUs),and 
