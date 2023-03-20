@@ -9,7 +9,7 @@
         <h4>Reported Product: {{ report.product }} </h4>
         <h4>Product Owner: {{ report.user }} </h4>
         <p><strong>Report Body:</strong> {{ report.body }} </p>
-        <hr>
+
         <br>
         {% endfor %}
         <br>
@@ -25,6 +25,15 @@
             {% endif %}
         </span>
     {% endif %}
+    <br>
+    <br>
+    <hr>
+    <div>
+        <h2>Average Below 2.0 </h2>
+
+        <h3> Name: {{ ave_rate.user }} </h3>
+        <h4> Rating: 1.9 </h4> 
+    </div>
 </div> 
 
 {% endblock content %}

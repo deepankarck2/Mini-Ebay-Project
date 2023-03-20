@@ -12,6 +12,7 @@ def get_file_path(request, filename):
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False, help_text="False=Not Approved, True=Approaved", blank=True)
     first_name = models.CharField(null=True,blank=True, max_length=150)
     last_name = models.CharField(null=True,blank=True, max_length=150)
     image = models.ImageField(default='profile_pics/default.jpg', upload_to= get_file_path)

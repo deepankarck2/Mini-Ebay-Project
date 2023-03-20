@@ -27,11 +27,11 @@
                     <div class="bid_prod_info">
                         {% csrf_token %}
                         <input  class="bid_id_num" type="hidden" value="{{seller_bid_product_item.id}}">
-                        <p>{{ seller_bid_product_item.product }}</p>
-                        <p>{{ seller_bid_product_item.bidder }}</p>
-                        <p>{{ seller_bid_product_item.product.bid_starting_price }}</p>
-                        <p>{{ seller_bid_product_item.bidding_price }}</p>
-                        <p>{{ seller_bid_product_item.quantity }}</p>
+                        <p>Product Name: {{ seller_bid_product_item.product }}</p>
+                        <p> Bidder: {{ seller_bid_product_item.bidder }}</p>
+                        <p>Bid starting Price: {{ seller_bid_product_item.product.bid_starting_price }}</p>
+                        <p>This bidding Price: {{ seller_bid_product_item.bidding_price }}</p>
+                        <p>Bid Quantity: {{ seller_bid_product_item.quantity }}</p>
                         <button class="bid_confirm_btn" value={{seller_bid_product_item.id}}>Confirm Bid</button>
                         <br> 
                         <br>

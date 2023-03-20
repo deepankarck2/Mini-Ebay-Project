@@ -84,16 +84,3 @@ def placeorder(request):
             messages.success(request, "Your Order has been placed successfully")
     return redirect(url)
 
-    
-
-
-    # orderStatuses = (
-    #     ('Pending', "Pending"),
-    #     ('Out for shipping', 'Out for Shipping'),
-    #     ('Completed', 'Completed'),
-    # )
-    # status = models.CharField(max_length=150, choices=orderStatuses, default='Pending')
-    # message = models.TextField(null=True)
-    # tracking_number = models.CharField(max_length=150, null=True)
-    # created_at = models.DateField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)

@@ -312,7 +312,8 @@ def confirm_bid_sell_prod(request):
         bidder = selected_bid.bidder
         product = selected_bid.product
         bidder_account = Account.objects.filter(user=bidder).first()
-
+        bid_seller_account = Account.objects.filter(user = product.author).first()
+        
         newOrder = Order()
         newOrder.user = bidder
         newOrder.first_name = bidder_account.first_name
@@ -334,9 +335,15 @@ def confirm_bid_sell_prod(request):
         while Order.objects.filter(tracking_number = tracking_num) is None:
             tracking_num = "Xh&y" + str(random.randint(1111111, 9999999))
         newOrder.tracking_number = tracking_num
-  
-        newOrder.save() 
         
+        bidder_account.account_balance = bidder_account.account_balance - bid_total_price
+        bidder_account.save()
+
+        bid_seller_account.account_balance = bid_seller_account.account_balance + bid_total_price
+        bid_seller_account.save()
+        
+        newOrder.save() 
+
         bid_order_item = product
         OrderItem.objects.create(
             order = newOrder,
@@ -395,10 +402,19 @@ def admin_view(request):
         all_reports = paginator.page(1)
     except EmptyPage:
         all_reports = paginator.page(paginator.num_pages)
+    
+    ave_rate = {
+        'user' : 'syeda'
+    }
+
+    
     context = {
-        'all_reports' : all_reports
+        'all_reports' : all_reports,
+        'ave_rate' : ave_rate
     }
     return render(request, "store/admin_view.html", context)
+
+
 # def search1(request):
 #     if request.GET:
 #         mydict = dict(request.GET)
